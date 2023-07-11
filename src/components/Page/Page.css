@@ -5,10 +5,10 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   margin: 0;
+  min-width: 320px;
   background-color: #FFFFFF;
   color: #000000;
   font-family: 'Inter', 'Arial', sans-serif;
-  min-width: 320px;
   cursor: auto;
   box-sizing: border-box;
   }
