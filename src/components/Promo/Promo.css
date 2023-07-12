@@ -1,7 +1,6 @@
 .promo {
-  max-width: 1280px;
   background-color: #F3C1F8;
-  background-image: url(../../../images/landing-logo.svg);
+  background-image: url(../../images/landing-logo.svg);
   background-position: center center;
   background-repeat: no-repeat;
   display: flex;

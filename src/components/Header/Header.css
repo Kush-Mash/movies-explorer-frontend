@@ -45,6 +45,7 @@
   color: #FFF;
   cursor: pointer;
   transition: 0.3s;
+  border: 0;
 }
 
 .header__entry:hover {
