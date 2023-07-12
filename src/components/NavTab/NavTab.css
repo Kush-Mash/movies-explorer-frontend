@@ -19,9 +19,8 @@
   margin: 0;
   text-decoration: none;
   font-size: 13px;
-  font-style: normal;
   font-weight: 500;
-  line-height: 16px;
+  line-height: 1.23;
   text-decoration-line: underline;
   align-self: center;
 }

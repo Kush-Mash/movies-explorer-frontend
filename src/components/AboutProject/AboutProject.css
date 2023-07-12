@@ -1,0 +1,75 @@
+.about-project {
+  padding: 110px 70px 100px;
+}
+
+.about-project__title {
+  margin: 0;
+  padding: 0 0 23px;
+  max-width: 600px;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+}
+
+.about-project__box {
+  border-top: 1px solid #000;
+  padding: 70px 0 110px;
+  display: flex;
+  gap: 40px;
+}
+
+.about-project__column {
+  max-width: 550px;
+}
+
+.about-project__subtitle {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.8px;
+}
+
+.about-project__description {
+  margin: 0;
+  padding: 26px 0 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42;
+}
+
+.about-project__duration {
+  display: grid;
+  grid-template-columns: 228px auto;
+  grid-template-rows: 36px 36px;
+}
+
+.about-project__timeline {
+  margin: 0;
+  padding: 9px 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.about-project__part {
+  margin: 0;
+  padding: 9px 0;
+  color: #A0A0A0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.21;
+}
+
+.about-project__timeline_color_black {
+  color: #FFF;
+  background-color: #000;
+}
+
+.about-project__timeline_color_grey {
+  background-color: #F2F2F2;
+}
