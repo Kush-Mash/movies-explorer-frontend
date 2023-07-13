@@ -4,6 +4,7 @@ import NavTab from "../NavTab/NavTab.jsx";
 import AboutPrject from "../AboutProject/AboutProject.jsx";
 import Techs from "../Techs/Techs.jsx";
 import AboutMe from "../AboutMe/AboutMe.jsx";
+import Portfolio from "../Portfolio/Portfolio.jsx";
 
 function Main() {
   return (
@@ -13,6 +14,7 @@ function Main() {
       <AboutPrject />
       <Techs />
       <AboutMe />
+      <Portfolio />
     </main>
   );
 }
