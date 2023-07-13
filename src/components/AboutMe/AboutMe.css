@@ -6,8 +6,6 @@
   border-top: 1px solid #000;
   padding: 66px 0 0;
   display: grid;
-  /* grid-template-columns: minmax(50px, 46.75%) fit-content(49.19%);
-  grid-template-rows: repeat(4, minmax(min-content, max-content)); */
   grid-template-columns: repeat(2, auto);
   grid-template-rows: repeat(4, auto);
   gap: 0 270px;
