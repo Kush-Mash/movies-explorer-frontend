@@ -1,17 +1,17 @@
 .promo {
   background-color: #F3C1F8;
   background-image: url(../../images/landing-logo.svg);
-  background-position: center center;
+  background-position: center 82px;
   background-repeat: no-repeat;
   display: flex;
   justify-content: center;
-  align-items: center;
   box-sizing: border-box;
   aspect-ratio: 1280/524;
 }
 
 .promo__title {
   margin: 0;
+  padding: 184px 0;
   max-width: 730px;
   text-align: center;
   font-size: 50px;

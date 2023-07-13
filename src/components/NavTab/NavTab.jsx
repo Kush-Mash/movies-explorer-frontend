@@ -5,8 +5,8 @@ function NavTab() {
   return (
     <nav className='nav'>
       <ul className='nav__links'>
-      <li><p className='nav__link'>Студент</p></li>
-      <li><p className='nav__link'>Студент</p></li>
+      <li><p className='nav__link'>О&nbsp;проекте</p></li>
+      <li><p className='nav__link'>Технологии</p></li>
       <li><p className='nav__link'>Студент</p></li>
         {/* <li><Link to='#' className='nav__link'>О&nbsp;проекте</Link></li>
         <li><Link to='#' className='nav__link'>Технологии</Link></li>

@@ -3,6 +3,8 @@
 }
 
 .portfolio__title {
+  margin: 0 0 32px;
+  padding: 0;
   width: 250px;
   color: #A0A0A0;
   font-size: 18px;
