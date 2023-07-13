@@ -3,6 +3,7 @@ import Promo from "../Promo/Promo.jsx";
 import NavTab from "../NavTab/NavTab.jsx";
 import AboutPrject from "../AboutProject/AboutProject.jsx";
 import Techs from "../Techs/Techs.jsx";
+import AboutMe from "../AboutMe/AboutMe.jsx";
 
 function Main() {
   return (
@@ -11,6 +12,7 @@ function Main() {
       <NavTab />
       <AboutPrject />
       <Techs />
+      <AboutMe />
     </main>
   );
 }

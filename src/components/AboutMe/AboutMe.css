@@ -1,0 +1,68 @@
+.me {
+  padding: 110px 70px 100px;
+}
+
+.me__box {
+  border-top: 1px solid #000;
+  padding: 66px 0 0;
+  display: grid;
+  /* grid-template-columns: minmax(50px, 46.75%) fit-content(49.19%);
+  grid-template-rows: repeat(4, minmax(min-content, max-content)); */
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(4, auto);
+  gap: 0 270px;
+  grid-template-areas:
+  'title photo'
+  'subtitle photo'
+  'text photo'
+  'github photo';
+}
+
+.me__title {
+  margin: 0;
+  padding: 0;
+  width: 600px;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -2px;
+  grid-area: title;
+}
+
+.me__subtitle {
+  margin: 0;
+  padding: 18px 0 0;
+  width: 600px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.11;
+  grid-area: subtitle;
+}
+
+.me__description {
+  margin: 0;
+  padding: 26px 0 0;
+  width: 600px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.57;
+  grid-area: text;
+}
+
+.me__github {
+  margin: 0;
+  padding: 99px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  grid-area: github;
+}
+
+.me__photo {
+  display: block;
+  width: 270px;
+  height: 327px;
+  border-radius: 10px;
+  object-fit: cover;
+  grid-area: photo;
+}
