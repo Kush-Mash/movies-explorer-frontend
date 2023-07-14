@@ -23,4 +23,10 @@
   line-height: 1.23;
   text-decoration-line: underline;
   align-self: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav__link:hover {
+  opacity: 0.8;
 }

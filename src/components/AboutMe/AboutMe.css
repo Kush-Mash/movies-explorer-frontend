@@ -54,6 +54,12 @@
   font-weight: 500;
   line-height: normal;
   grid-area: github;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.me__github:hover {
+  opacity: 0.8;
 }
 
 .me__photo {

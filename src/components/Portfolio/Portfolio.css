@@ -39,4 +39,10 @@
   padding: 0;
   max-width: 880px;
   text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.portfolio__link:hover {
+  opacity: 0.7;
 }
