@@ -1,0 +1,12 @@
+.toggle {
+  background-image: url(../../images/smalltumb.svg);
+  background-repeat: no-repeat;
+  background-position: 0%;
+}
+
+.toggle__input {
+  background: transparent;
+
+  border: none;
+
+}
