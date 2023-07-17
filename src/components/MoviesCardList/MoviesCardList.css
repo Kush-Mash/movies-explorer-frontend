@@ -1,0 +1,36 @@
+.cards {
+  margin: 0 auto;
+  padding: 79px 70px 0;
+  max-width: 1280px;
+  box-sizing: border-box;
+}
+
+.cards__list {
+  margin: 0;
+  padding: 0;
+}
+
+.cards__button {
+  margin: 60px auto 80px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+  height: 36px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+  border-radius: 6px;
+  background: transparent;
+  border-color: #E8E8E8;
+  border-width: 1px;
+  border-style:solid;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cards__button:hover {
+  opacity: 0.8;
+}
