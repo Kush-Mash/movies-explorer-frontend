@@ -9,6 +9,7 @@ import SavedMovies from "../SavedMovies/SavedMovies.jsx";
 import Register from "../Entry/Register.jsx";
 import Login from "../Entry/Login.jsx";
 import PageNotFound from "../PageNotFound/PageNotFound.jsx";
+import Profile from "../Profile/Profile.jsx";
 
 function App() {
   return (
@@ -41,6 +42,15 @@ function App() {
               <Header background={"header_place_movies"} />
               <SavedMovies />
               <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <>
+              <Header background={"header_place_movies"} />
+              <Profile />
             </>
           }
         />

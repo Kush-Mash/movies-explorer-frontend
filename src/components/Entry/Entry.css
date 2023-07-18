@@ -57,6 +57,10 @@
   font-size: 13px;
 }
 
+.entry__input:focus {
+  outline: none;
+}
+
 .entry__error {
   margin: 3px 0 0;
   color: #FF4062;
