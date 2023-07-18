@@ -8,6 +8,7 @@ import Movies from "../Movies/Movies.jsx";
 import SavedMovies from "../SavedMovies/SavedMovies.jsx";
 import Register from "../Entry/Register.jsx";
 import Login from "../Entry/Login.jsx";
+import PageNotFound from "../PageNotFound/PageNotFound.jsx";
 
 function App() {
   return (
@@ -53,6 +54,12 @@ function App() {
           path="/signin"
           element={
             <Login />
+          }
+        />
+        <Route
+          exact path='/*'
+          element={
+            <PageNotFound />
           }
         />
       </Routes>
