@@ -1,16 +1,10 @@
-import React from 'react';
-// import { Link } from 'react-router-dom';
-
 function NavTab() {
   return (
     <nav className='nav'>
       <ul className='nav__links'>
-      <li><p className='nav__link'>О&nbsp;проекте</p></li>
-      <li><p className='nav__link'>Технологии</p></li>
-      <li><p className='nav__link'>Студент</p></li>
-        {/* <li><Link to='#' className='nav__link'>О&nbsp;проекте</Link></li>
-        <li><Link to='#' className='nav__link'>Технологии</Link></li>
-        <li><Link to='#' className='nav__link'>Студент</Link></li> */}
+        <li><a className="nav__link" href='#project'>О&nbsp;проекте</a></li>
+        <li><a className='nav__link' href='#techs'>Технологии</a></li>
+        <li><a className='nav__link' href='#me'>Студент</a></li>
       </ul>
     </nav>
   );

@@ -60,6 +60,6 @@
   display: block;
   width: 220px;
   height: 122px;
-  grid-area: photo;
   object-fit: cover;
+  grid-area: photo;
 }

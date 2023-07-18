@@ -1,15 +1,13 @@
 import SearchForm from "../SearchForm/SearchForm.jsx";
 import MoviesCardList from "../MoviesCardList/MoviesCardList.jsx";
-import MoreButton from "../MoreButton/MoreButton.jsx";
 
-function Movies() {
+function SavedMovies() {
   return (
     <>
       <SearchForm />
-      <MoviesCardList more={""} />
-      <MoreButton />
+      <MoviesCardList more={"cards__list_place_saved"} />
     </>
   );
 }
 
-export default Movies;
+export default SavedMovies;

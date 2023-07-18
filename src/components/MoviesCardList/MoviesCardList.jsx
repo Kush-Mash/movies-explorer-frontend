@@ -1,9 +1,9 @@
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-function MoviesCardList() {
+function MoviesCardList({more}) {
   return (
     <section className="cards">
-      <ul className="cards__list">
+      <ul className={`cards__list ${more}`}>
         <MoviesCard />
         <MoviesCard />
         <MoviesCard />
@@ -12,7 +12,6 @@ function MoviesCardList() {
         <MoviesCard />
         <MoviesCard />
       </ul>
-      <button className="cards__button" type="button">Ешё</button>
     </section>
   );
 }

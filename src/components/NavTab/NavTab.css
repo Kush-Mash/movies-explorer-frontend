@@ -1,6 +1,5 @@
 .nav {
   background-color: #000;
-  color: #FFF;
 }
 
 .nav__links {
@@ -17,11 +16,12 @@
 
 .nav__link {
   margin: 0;
+  color: #FFF;
   text-decoration: none;
+  text-decoration-line: underline;
   font-size: 13px;
   font-weight: 500;
   line-height: 1.23;
-  text-decoration-line: underline;
   align-self: center;
   cursor: pointer;
   transition: 0.3s;
