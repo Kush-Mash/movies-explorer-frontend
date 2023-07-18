@@ -62,9 +62,9 @@
 
 .profile__submit {
   padding: 0;
-  margin: 220px calc((100% - 120px)/2) 0;
+  margin: 194px calc((100% - 120px)/2) 0;
   width: 120px;
-  height: 35px;
+  height: 27px;
   border: none;
   background: transparent;
   text-align: center;
@@ -79,9 +79,9 @@
 
 .profile__logout {
   padding: 0;
-  margin: 0;
+  margin: 6px 0 0;
   width: 120px;
-  height: 35px;
+  height: 27px;
   border: none;
   background: transparent;
   color: #FF4062;
