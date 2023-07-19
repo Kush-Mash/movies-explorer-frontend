@@ -22,7 +22,9 @@ function MoviesCard() {
         ></button>
       ) : (
         <button
-          className={`card__like ${isLiked ? "card__like_status_active" : "card__like_status_inactive"}`}
+          className={`card__like ${
+            isLiked ? "card__like_status_active" : "card__like_status_inactive"
+          }`}
           type="button"
           aria-label="Добавить в избранное"
           onClick={handleLikeClick}

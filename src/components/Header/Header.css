@@ -61,3 +61,49 @@
 .header__entry:hover {
   opacity: 0.8;
 }
+
+.header__nav-movies {
+  display: grid;
+  grid-template-columns: 54px 144px 1fr;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  /* justify-items: end; */
+}
+
+.header__movies {
+  text-decoration: none;
+  color: #000;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.38;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.header__movies:hover {
+  opacity: 0.7;
+}
+
+.header__movies_active {
+  font-weight: 500;
+}
+
+.header__profile {
+  margin: 0 0 0 18.5vw;
+  padding: 0;
+  width: 100px;
+  height: 32px;
+  border-radius: 20px;
+  border: none;
+  background: #F9F9F9;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.14;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.header__profile:hover {
+  opacity: 0.8;
+}

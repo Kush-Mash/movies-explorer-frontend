@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Profile() {
   return (
     <section className="profile">
@@ -15,7 +17,8 @@ function Profile() {
         <p className="profile__error">Что-то пошло не так...</p>
         <button className="profile__submit" type="submit">Редактировать</button>
       </form>
-      <button className="profile__logout" type="button">Выйти из&nbsp;аккаунта</button>
+      {/* <button className="profile__logout" type="button">Выйти из&nbsp;аккаунта</button> */}
+      <Link to="/signin"><button className="profile__logout" type="button">Выйти из&nbsp;аккаунта</button></Link>
     </section>
   );
 }
