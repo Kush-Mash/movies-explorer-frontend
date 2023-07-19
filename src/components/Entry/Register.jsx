@@ -3,7 +3,7 @@ import logo from "../../images/logo.svg";
 
 function Register() {
   return (
-    <div className="entry">
+    <section className="entry">
       <Link to="/"><img className="entry__logo" src={logo} alt="Логотип" /></Link>
       <h1 className="entry__title">Добро пожаловать!</h1>
       <form className="entry__form">
@@ -19,7 +19,7 @@ function Register() {
         <button className="entry__submit" type="submit">Зарегистрироваться</button>
         <p className="entry__question">Уже зарегистрированы?<Link to="/signin" className="entry__link"> Войти</Link></p>
       </form>
-    </div>
+    </section>
   );
 }
 

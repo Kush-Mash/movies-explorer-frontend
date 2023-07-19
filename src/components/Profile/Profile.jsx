@@ -1,6 +1,6 @@
 function Profile() {
   return (
-    <div className="profile">
+    <section className="profile">
       <h1 className="profile__title">Привет, Виталий!</h1>
       <form className="profile__form">
         <div className="profile__cell">
@@ -16,7 +16,7 @@ function Profile() {
         <button className="profile__submit" type="submit">Редактировать</button>
       </form>
       <button className="profile__logout" type="button">Выйти из&nbsp;аккаунта</button>
-    </div>
+    </section>
   );
 }
 
