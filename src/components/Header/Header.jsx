@@ -14,9 +14,21 @@ function Header({background}) {
         </nav>
       ) : (
         <nav className="header__nav-movies">
-          <NavLink to="/movies" className={({isActive}) => `header__movies ${isActive ? "header__movies_active" : ""}`}>Фильмы</NavLink>
-          <NavLink to="/saved-movies" className={({isActive}) => `header__movies ${isActive ? "header__movies_active" : ""}`}>Сохранённые&nbsp;фильмы</NavLink>
-          <Link to="/profile"><button className="header__profile" type="button">Аккаунт</button></Link>
+          <NavLink
+            to="/movies"
+            className={({isActive}) => `header__movies ${isActive ? "header__movies_active" : ""}`}
+          >
+            Фильмы
+          </NavLink>
+          <NavLink
+            to="/saved-movies"
+            className={({isActive}) => `header__movies ${isActive ? "header__movies_active" : ""}`}
+          >
+            Сохранённые&nbsp;фильмы
+          </NavLink>
+          <Link to="/profile">
+            <button className="header__profile" type="button">Аккаунт</button>
+          </Link>
         </nav>
       )}
     </header>
