@@ -35,7 +35,8 @@
   padding: 0;
   margin-right: 30px;
   text-align: right;
-  background: transparent;
+  text-decoration: none;
+  color: #000;
   border: none;
   cursor: pointer;
   transition: 0.3s;
@@ -48,6 +49,7 @@
 .header__entry {
   width: 76px;
   height: 32px;
+  text-decoration: none;
   border-radius: 3px;
   background: #000;
   color: #FFF;

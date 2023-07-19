@@ -1,13 +1,13 @@
-import React from 'react';
+import { Link } from "react-router-dom";
 import logo from '../../images/logo.svg'
 
 function Header({background}) {
   return (
     <header className={`header ${background}`}>
-      <img className="header__logo" alt="Логотип киногида" src={logo}/>
+      <Link to="/"><img className="entry__logo" src={logo} alt="Логотип" /></Link>
       <nav className="header__buttons-box">
-        <button className="header__registration">Регистрация</button>
-        <button className="header__entry">Войти</button>
+        <Link to="/signup" className="header__registration">Регистрация</Link>
+        <Link to="/signin"><button className="header__entry" type="button">Войти</button></Link>
       </nav>
     </header>
   );

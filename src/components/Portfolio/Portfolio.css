@@ -39,8 +39,9 @@
   padding: 0;
   max-width: 880px;
   text-decoration: none;
-  cursor: pointer;
+  color: #000;
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .portfolio__link:hover {
