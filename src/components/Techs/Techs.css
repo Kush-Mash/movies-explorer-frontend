@@ -54,3 +54,30 @@
   line-height: normal;
   letter-spacing: -0.56px;
 }
+
+@media screen and (max-width: 960px) {
+  .techs {
+    padding: 90px 50px;
+  }
+
+  .techs__box {
+    padding-top: 80px;
+  }
+
+  .techs__description {
+    padding-top: 22px;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: -0.48px;
+  }
+
+  .techs__items {
+    padding-top: 83px;
+  }
+
+  .techs__item {
+    width: 84px;
+    font-size: 12px;
+  }
+
+}

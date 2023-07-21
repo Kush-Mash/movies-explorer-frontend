@@ -6,16 +6,41 @@
   display: flex;
   justify-content: center;
   box-sizing: border-box;
-  aspect-ratio: 1280/524;
 }
 
 .promo__title {
-  margin: 0;
-  padding: 184px 0;
+  margin: 184px 0 223px;
+  padding: 0;
   max-width: 730px;
   text-align: center;
   font-size: 50px;
   font-weight: 400;
   line-height: 1.16;
   letter-spacing: -2px;
+}
+
+@media screen and (max-width: 860px) {
+  .promo {
+    background-position: center 224px;
+  }
+
+  .promo__title {
+    margin-top: 326px;
+    margin-bottom: 342px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .promo {
+    background-size: 248px 248px;
+  }
+
+  .promo__title {
+    margin-top: 207px;
+    margin-bottom: 246px;
+    max-width: 300px;
+    font-size: 31px;
+    line-height: 1.25;
+    letter-spacing: -1.24px;
+  }
 }

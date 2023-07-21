@@ -1,10 +1,10 @@
-.toggle {
+.checkbox {
   background-image: url(../../images/smalltumb.svg);
   background-repeat: no-repeat;
   background-position: 0%;
 }
 
-.toggle__input {
+.checkbox__input {
   background: transparent;
 
   border: none;

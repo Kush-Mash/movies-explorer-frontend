@@ -1,3 +1,5 @@
+import FilterCheckbox from "../FilterCheckbox/FilterCheckbox.jsx";
+
 function SearchForm() {
   return (
     <section className="search">
@@ -10,9 +12,7 @@ function SearchForm() {
           />
           <button className="search__submit" type="submit"></button>
           <div className="search__filter">
-            <div className="toggle">
-              <input className="toggle__input" type="checkbox" name="isShortFilm" />
-            </div>
+            <FilterCheckbox />
             <label className="search__label">Короткометражки</label>
           </div>
         </form>

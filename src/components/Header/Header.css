@@ -25,7 +25,7 @@
   display: block;
 }
 
-.header__buttons-box {
+.header__nav-main {
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
@@ -68,7 +68,6 @@
   gap: 16px;
   align-items: center;
   justify-content: center;
-  /* justify-items: end; */
 }
 
 .header__movies {
@@ -106,4 +105,29 @@
 
 .header__profile:hover {
   opacity: 0.8;
+}
+
+@media screen and (max-width: 960px) {
+  .header {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .header {
+    padding-right: 4px;
+    padding-left: 4px;
+  }
+
+  .header__entry {
+    width: 54px;
+    height: 26px;
+
+  }
+
+  .header__nav-main {
+    font-size: 10px;
+    line-height: 1.6;
+  }
 }

@@ -30,3 +30,10 @@
 .nav__link:hover {
   opacity: 0.8;
 }
+
+@media screen and (max-width: 460px) {
+  .nav__link {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+}

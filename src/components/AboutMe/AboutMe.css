@@ -72,3 +72,43 @@
   object-fit: cover;
   grid-area: photo;
 }
+
+@media screen and (max-width: 960px) {
+  .me {
+    padding: 90px 50px;
+  }
+
+  .me__box {
+    column-gap: 50px;
+  }
+
+  .me__title {
+    width: 364px;
+    font-size: 40px;
+    line-height: 1;
+    letter-spacing: -1.6px;
+  }
+
+  .me__subtitle {
+    padding-top: 16px;
+    width: 364px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .me__description {
+    padding-top: 20px;
+    width: 364px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .me__github {
+    padding-top: 87px;
+  }
+
+  .me__photo {
+    width: 255px;
+    height: 307px;
+  }
+}
