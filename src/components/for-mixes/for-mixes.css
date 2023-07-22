@@ -1,0 +1,82 @@
+.section-title {
+  margin: 0;
+  padding: 0 0 23px;
+  max-width: 600px;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+}
+
+.section-container {
+  padding: 100px 70px;
+}
+
+.line {
+  border-top: 1px solid #000;
+}
+
+.section-description {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.43;
+}
+
+.large-title {
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -2px;
+}
+
+.each-button {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.each-button:hover {
+  opacity: 0.8;
+}
+
+.each-link {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.each-link:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 960px) {
+  .section-container {
+    padding: 90px 50px;
+  }
+
+  .section-description {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}
+
+@media screen and (max-width: 460px) {
+
+  .section-title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .section-container {
+    padding: 70px 14px;
+  }
+
+  .section-description {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .large-title {
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: -1.2px;
+  }
+}

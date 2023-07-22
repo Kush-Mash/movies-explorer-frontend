@@ -2,11 +2,11 @@ import React from "react";
 
 function Techs() {
   return (
-    <section className="techs" id="techs">
-      <h2 className="title">Технологии</h2>
-      <div className="techs__box">
-        <h3 className="techs__title">7&nbsp;технологий</h3>
-        <p className="techs__description">
+    <section className="section-container techs" id="techs">
+      <h2 className="section-title">Технологии</h2>
+      <div className="techs__box line">
+        <h3 className="large-title techs__title">7&nbsp;технологий</h3>
+        <p className="section-description techs__description">
           На&nbsp;курсе веб-разработки мы&nbsp;освоили технологии, которые применили в&nbsp;дипломном проекте.
         </p>
         <ul className="techs__items">

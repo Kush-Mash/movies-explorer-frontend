@@ -15,10 +15,4 @@
   border-color: #E8E8E8;
   border-width: 1px;
   border-style:solid;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.more:hover {
-  opacity: 0.8;
 }

@@ -12,12 +12,6 @@
   height: 38px;
   object-fit: cover;
   display: block;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.entry__logo:hover {
-  opacity: 0.8;
 }
 
 .entry__title {
@@ -77,12 +71,6 @@
   background: #000;
   color: #FFF;
   font-size: 14px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.entry__submit:hover {
-  opacity: 0.8;
 }
 
 .entry__submit_with_indent {
@@ -102,10 +90,4 @@
   text-align: center;
   font-size: 14px;
   text-decoration: none;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.entry__link:hover {
-  opacity: 0.8;
 }

@@ -1,9 +1,8 @@
 .me {
-  padding: 110px 70px 100px;
+  margin: 11px 0 0;
 }
 
 .me__box {
-  border-top: 1px solid #000;
   padding: 66px 0 0;
   display: grid;
   grid-template-columns: repeat(2, auto);
@@ -19,18 +18,14 @@
 .me__title {
   margin: 0;
   padding: 0;
-  width: 600px;
-  font-size: 50px;
-  font-weight: 400;
-  line-height: 1.16;
-  letter-spacing: -2px;
+  max-width: 600px;
   grid-area: title;
 }
 
 .me__subtitle {
   margin: 0;
   padding: 18px 0 0;
-  width: 600px;
+  max-width: 600px;
   font-size: 18px;
   font-weight: 500;
   line-height: 1.11;
@@ -40,9 +35,7 @@
 .me__description {
   margin: 0;
   padding: 26px 0 0;
-  width: 600px;
-  font-size: 14px;
-  font-weight: 400;
+  max-width: 600px;
   line-height: 1.57;
   grid-area: text;
 }
@@ -56,12 +49,6 @@
   color: #000;
   text-decoration: none;
   grid-area: github;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.me__github:hover {
-  opacity: 0.8;
 }
 
 .me__photo {

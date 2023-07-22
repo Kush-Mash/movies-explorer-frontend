@@ -45,12 +45,6 @@
   background-position: center right;
   background-size: 80px 34px;
   background-repeat: no-repeat;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.search__submit:hover {
-  opacity: 0.8;
 }
 
 .search__filter {

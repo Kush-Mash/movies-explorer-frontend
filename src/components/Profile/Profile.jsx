@@ -15,9 +15,9 @@ function Profile() {
           <input className="profile__input" name="email" type="email" placeholder="E-mail" required />
         </div>
         <p className="profile__error">Что-то пошло не так...</p>
-        <button className="profile__submit" type="submit">Редактировать</button>
+        <button className="each-button profile__submit" type="submit">Редактировать</button>
       </form>
-      <Link to="/signin"><button className="profile__logout" type="button">Выйти из&nbsp;аккаунта</button></Link>
+      <Link to="/signin"><button className="each-button profile__logout" type="button">Выйти из&nbsp;аккаунта</button></Link>
     </section>
   );
 }

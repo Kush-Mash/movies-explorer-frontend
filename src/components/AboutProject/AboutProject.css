@@ -1,19 +1,8 @@
 .project {
-  padding: 110px 70px 107px;
-}
-
-.title {
-  margin: 0;
-  padding: 0 0 23px;
-  max-width: 600px;
-  font-size: 22px;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -0.88px;
+  margin: 12px 0 7px;
 }
 
 .project__box {
-  border-top: 1px solid #000;
   padding: 70px 0 110px;
   display: flex;
   gap: 40px;
@@ -35,9 +24,6 @@
 .project__description {
   margin: 0;
   padding: 26px 0 0;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.42;
 }
 
 .project__duration {
@@ -85,8 +71,6 @@
 
   .project__description {
     padding-top: 23px;
-    font-size: 12px;
-    line-height: 1.5;
   }
 
   .project__duration {

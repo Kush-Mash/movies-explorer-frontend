@@ -45,13 +45,7 @@
   background: transparent;
   background-repeat: no-repeat;
   background-size: 14px 12px;
-  cursor: pointer;
-  transition: 0.3s;
   grid-area: like;
-}
-
-.card__like:hover {
-  opacity: 0.8;
 }
 
 .card__like_status_active {

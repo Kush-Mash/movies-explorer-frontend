@@ -16,13 +16,13 @@ function MoviesCard() {
       <p className="card__subtitle">1ч&nbsp;42м</p>
       {location.pathname === "/saved-movies" ? (
         <button
-          className="card__like card__like_status_delete"
+          className="each-button card__like card__like_status_delete"
           type="button"
           aria-label="Удалить из избранного"
         ></button>
       ) : (
         <button
-          className={`card__like ${
+          className={`each-button card__like ${
             isLiked ? "card__like_status_active" : "card__like_status_inactive"
           }`}
           type="button"

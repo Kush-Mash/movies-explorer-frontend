@@ -69,12 +69,6 @@
   background: transparent;
   text-align: center;
   font-size: 13px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.profile__submit:hover {
-  opacity: 0.8;
 }
 
 .profile__logout {
@@ -87,10 +81,4 @@
   color: #FF4062;
   text-align: center;
   font-size: 13px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.profile__logout:hover {
-  opacity: 0.8;
 }

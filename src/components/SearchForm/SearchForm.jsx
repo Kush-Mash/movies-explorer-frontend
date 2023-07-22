@@ -10,7 +10,7 @@ function SearchForm() {
             type="text"
             placeholder="Фильм"
           />
-          <button className="search__submit" type="submit"></button>
+          <button className="each-button search__submit" type="submit"></button>
           <div className="search__filter">
             <FilterCheckbox />
             <label className="search__label">Короткометражки</label>

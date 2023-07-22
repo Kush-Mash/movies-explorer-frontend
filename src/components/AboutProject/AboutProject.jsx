@@ -2,14 +2,14 @@ import React from "react";
 
 function AboutPrject() {
   return (
-    <section className="project" id="project">
-      <h2 className="title">О&nbsp;проекте</h2>
-      <div className="project__box">
+    <section className="section-container project" id="project">
+      <h2 className="section-title">О&nbsp;проекте</h2>
+      <div className="project__box line">
         <div className="project__column">
           <h3 className="project__subtitle">
           Дипломный проект включал 5&nbsp;этапов
           </h3>
-          <p className="project__description">
+          <p className="section-description project__description">
           Составление плана, работу над бэкендом, вёрстку, добавление функциональности и&nbsp;финальные доработки.
           </p>
         </div>
@@ -17,7 +17,7 @@ function AboutPrject() {
           <h3 className="project__subtitle">
           На&nbsp;выполнение диплома ушло 5&nbsp;недель
           </h3>
-          <p className="project__description">
+          <p className="section-description project__description">
           У&nbsp;каждого этапа был мягкий и&nbsp;жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.
           </p>
         </div>
