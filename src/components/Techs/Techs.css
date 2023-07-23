@@ -11,6 +11,10 @@
   padding: 0;
   max-width: 600px;
   text-align: center;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -2px;
 }
 
 .techs__description {
@@ -78,6 +82,12 @@
 
   .techs__box {
     padding-top: 60px;
+  }
+
+  .techs__title {
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: -1.2px;
   }
 
   .techs__description {

@@ -1,5 +1,5 @@
 .project {
-  margin: 12px 0 7px;
+  margin: 12px 0 19px;
 }
 
 .project__box {
@@ -61,6 +61,11 @@
 }
 
 @media screen and (max-width: 960px) {
+  .project {
+    margin-top: 0;
+    margin-bottom: 9px;
+  }
+
   .project__box {
     padding-bottom: 93px;
   }

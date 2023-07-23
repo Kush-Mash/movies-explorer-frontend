@@ -25,12 +25,11 @@
   }
 
   .promo__title {
-    margin-top: 326px;
-    margin-bottom: 342px;
+    margin: 326px 10px 342px;
   }
 }
 
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 500px) {
   .promo {
     background-size: 248px 248px;
     background-position: center 142px;
