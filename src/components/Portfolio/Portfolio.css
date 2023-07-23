@@ -53,8 +53,8 @@
 
 @media screen and (max-width: 960px) {
   .portfolio {
-    padding-right: 50px;
-    padding-left: 50px;
+    /* padding-right: 50px;
+    padding-left: 50px; */
     padding-bottom: 68px;
   }
 
@@ -62,5 +62,34 @@
     font-size: 28px;
     line-height: 1.78;
     letter-spacing: -1.12px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .portfolio {
+    padding: 0;
+  }
+
+  .portfolio__title {
+    margin-top: 70px;
+    margin-bottom: 22px;
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.43;
+  }
+
+  .portfolio__item {
+    font-size: 18px;
+    line-height: 1.55;
+    letter-spacing: -0.72px;
+  }
+
+  .portfolio__site {
+    margin-top: 19.5px;
+    margin-bottom: 19.5px;
+  }
+
+  .portfolio__arrow {
+    margin-top: 0;
   }
 }

@@ -25,9 +25,8 @@
   margin: 0;
   padding: 100px 0 0;
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
   list-style-type: none;
 }
@@ -47,12 +46,11 @@
 }
 
 @media screen and (max-width: 960px) {
-  .techs {
-    padding: 90px 50px;
-  }
-
   .techs__box {
     padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .techs__description {
@@ -70,5 +68,25 @@
     width: 84px;
     font-size: 12px;
   }
+}
 
+@media screen and (max-width: 460px) {
+  .techs {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+
+  .techs__box {
+    padding-top: 60px;
+  }
+
+  .techs__description {
+    padding-top: 24px;
+  }
+
+  .techs__items {
+    padding-top: 50px;
+    max-width: 180px;
+    justify-content: start;
+  }
 }

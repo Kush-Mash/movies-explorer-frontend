@@ -30,4 +30,8 @@
     font-size: 11px;
     line-height: 1.45;
   }
+
+  .nav__links {
+    gap: 24px;
+  }
 }

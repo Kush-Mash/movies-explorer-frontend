@@ -29,7 +29,7 @@
 .project__duration {
   display: grid;
   grid-template-columns: 228px auto;
-  grid-template-rows: 36px 36px;
+  grid-template-rows: 36px 23px;
 }
 
 .project__timeline {
@@ -61,10 +61,6 @@
 }
 
 @media screen and (max-width: 960px) {
-  .project {
-    padding: 90px 50px 87px;
-  }
-
   .project__box {
     padding-bottom: 93px;
   }
@@ -75,5 +71,36 @@
 
   .project__duration {
     grid-template-columns: 140px auto;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .project {
+    margin: 0 4px 0;
+  }
+
+  .project__box {
+    padding-top: 60px;
+    padding-bottom: 57px;
+    flex-direction: column;
+    gap: 54px;
+  }
+
+  .project__description {
+    padding-top: 15px;
+  }
+
+  .project__duration {
+    grid-template-columns: 100px auto;
+  }
+
+  .project__timeline {
+    font-size: 11px;
+  }
+
+  .project__part {
+    padding-top: 10px;
+    padding-bottom: 0;
+    font-size: 11px;
   }
 }
