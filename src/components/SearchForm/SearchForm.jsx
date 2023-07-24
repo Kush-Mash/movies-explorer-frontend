@@ -11,10 +11,10 @@ function SearchForm() {
             placeholder="Фильм"
           />
           <button className="each-button search__submit" type="submit"></button>
-          <div className="search__filter">
+          <label className="search__filter" htmlFor="checkbox">
             <FilterCheckbox />
-            <label className="search__label">Короткометражки</label>
-          </div>
+            <span className="search__condition">Короткометражки</span>
+          </label>
         </form>
       </div>
     </section>
