@@ -1,0 +1,147 @@
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+}
+
+.navigation__box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 61.2%;
+}
+
+.navigation__movies {
+  display: flex;
+  gap: 16px;
+}
+
+.navigation__link {
+  text-decoration: none;
+  color: #000;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.38;
+}
+
+.navigation__link_active {
+  font-weight: 500;
+}
+
+.navigation__profile {
+  margin: 0;
+  padding: 0;
+  width: 100px;
+  height: 32px;
+  margin-left: auto;
+  border-radius: 20px;
+  border: none;
+  background: #F9F9F9;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.14;
+}
+
+.navigation__close {
+  display: none;
+  width: 30px;
+  height: 30px;
+  background-image: url(../../images/del.svg);
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  position: absolute;
+}
+
+#main {
+  display: none;
+}
+
+@media screen and (max-width: 960px) {
+  .navigation__box {
+    width: 68%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navigation {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-width: 520px;
+    height: 100vh;
+    background-color: #fff;
+    flex-direction: column;
+    justify-content: space-between;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 2;
+  }
+
+  .navigation_active {
+    visibility: visible;
+    opacity: 1;
+    position: fixed;
+  }
+
+  .navigation_active::before {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    content: '';
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .navigation__box {
+    padding: 0;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    position: absolute;
+    align-content: center;
+    background-color: #fff;
+    z-index: 3;
+  }
+
+  .navigation__movies {
+    padding-top: 160px;
+    flex-direction: column;
+    gap: 29px;
+  }
+
+  .navigation__close {
+    display: block;
+    top: 23px;
+    right: 24px;
+  }
+
+  .navigation__link {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .navigation__link_active {
+    text-decoration: underline 2px;
+    text-underline-offset: 8px;
+  }
+
+  .navigation__profile {
+    margin-bottom: 90px;
+  }
+
+  #main {
+    display: block;
+  }
+}

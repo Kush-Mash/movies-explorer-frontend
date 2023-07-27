@@ -1,4 +1,4 @@
-import FilterCheckbox from "../FilterCheckbox/FilterCheckbox.jsx";
+import FilterCheckbox from "../UIComponents/FilterCheckbox/FilterCheckbox.jsx";
 
 function SearchForm() {
   return (

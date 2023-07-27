@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
@@ -11,6 +11,12 @@ import PageNotFound from "../PageNotFound/PageNotFound.jsx";
 import Profile from "../Profile/Profile.jsx";
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(true);
+
+  function logout() {
+    setLoggedIn(false);
+  }
+
   return (
     <div className="page">
       <Routes>
@@ -18,7 +24,7 @@ function App() {
           path="/"
           element={
             <>
-              <Header background={"header_place_main"} />
+              <Header loggedIn={loggedIn} />
               <Main />
               <Footer />
             </>
@@ -28,7 +34,7 @@ function App() {
           path="/movies"
           element={
             <>
-              <Header background={"header_place_movies"} />
+              <Header loggedIn={loggedIn} />
               <Movies />
               <Footer />
             </>
@@ -38,7 +44,7 @@ function App() {
           path="/saved-movies"
           element={
             <>
-              <Header background={"header_place_movies"} />
+              <Header loggedIn={loggedIn} />
               <SavedMovies />
               <Footer />
             </>
@@ -48,15 +54,15 @@ function App() {
           path="/profile"
           element={
             <>
-              <Header background={"header_place_movies"} />
-              <Profile />
+              <Header loggedIn={loggedIn} />
+              <Profile logout={logout} />
             </>
           }
         />
         <Route
           path="/signup"
           element={
-            <Register />
+            <Register loggedIn={loggedIn} />
           }
         />
         <Route
