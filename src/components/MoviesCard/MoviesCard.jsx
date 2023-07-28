@@ -12,8 +12,8 @@ function MoviesCard() {
 
   return (
     <li className="card">
-      <h2 className="card__title">33&nbsp;слова о&nbsp;дизайне</h2>
-      <p className="card__subtitle">1ч&nbsp;42м</p>
+      <h2 className="card__title">33 слова о дизайне</h2>
+      <p className="card__subtitle">1ч 42м</p>
       {location.pathname === "/saved-movies" ? (
         <button
           className="each-button card__like card__like_status_delete"

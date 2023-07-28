@@ -16,3 +16,18 @@
   border-width: 1px;
   border-style:solid;
 }
+
+@media screen and (max-width: 960px) {
+  .more {
+    margin-top: 80px;
+    margin-bottom: 100px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .more {
+    margin-top: 69px;
+    margin-bottom: 100px;
+    width: 240px;
+  }
+}
