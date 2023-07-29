@@ -6,16 +6,34 @@ function Portfolio() {
       <h3 className="portfolio__title">Портфолио</h3>
       <ul className="portfolio__items">
         <li className="portfolio__item">
-          <a className="each-link portfolio__link" href="https://github.com/Kush-Mash/how-to-learn"><p className="portfolio__site">Статичный сайт</p><span className="portfolio__arrow">↗</span></a>
-
+          <a
+            className="each-link portfolio__link"
+            href="https://github.com/Kush-Mash/how-to-learn"
+            target="blank"
+          >
+            <p className="portfolio__site">Статичный сайт</p>
+            <span className="portfolio__arrow">↗</span>
+          </a>
         </li>
         <li className="portfolio__item">
-          <a className="each-link portfolio__link" href="https://github.com/Kush-Mash/russian-travel"><p className="portfolio__site">Адаптивный сайт</p><span className="portfolio__arrow">↗</span></a>
-
+          <a
+            className="each-link portfolio__link"
+            href="https://github.com/Kush-Mash/russian-travel"
+            target="blank"
+          >
+            <p className="portfolio__site">Адаптивный сайт</p>
+            <span className="portfolio__arrow">↗</span>
+          </a>
         </li>
         <li className="portfolio__item">
-          <a className="each-link portfolio__link" href="https://github.com/Kush-Mash/react-mesto-api-full-gha"><p className="portfolio__site">Одностраничное приложение</p><span className="portfolio__arrow">↗</span></a>
-
+          <a
+            className="each-link portfolio__link"
+            href="https://github.com/Kush-Mash/react-mesto-api-full-gha"
+            target="blank"
+          >
+            <p className="portfolio__site">Одностраничное приложение</p>
+            <span className="portfolio__arrow">↗</span>
+          </a>
         </li>
       </ul>
     </section>
@@ -23,4 +41,3 @@ function Portfolio() {
 }
 
 export default Portfolio;
-

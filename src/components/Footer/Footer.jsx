@@ -11,10 +11,10 @@ function Footer() {
           &copy;&nbsp;{new Date().getFullYear()}
         </span>
         <nav className="footer__menu">
-          <a className="each-link footer__link" href="https://practicum.yandex.ru/">
+          <a className="each-link footer__link" href="https://practicum.yandex.ru/" target="blank">
             Яндекс.Практикум
           </a>
-          <a className="each-link footer__link" href="https://github.com/Kush-Mash">
+          <a className="each-link footer__link" href="https://github.com/Kush-Mash" target="blank">
             Github
           </a>
         </nav>

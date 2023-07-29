@@ -29,10 +29,6 @@
   flex-direction: column;
 }
 
-.entry__form:focus {
-  outline: none;
-}
-
 .entry__label {
   margin: 8px 0 10px;
   color: #A0A0A0;
@@ -52,7 +48,7 @@
 }
 
 .entry__input:focus {
-  outline: none;
+  outline: 1px solid #E8E8E8;
 }
 
 .entry__error {
@@ -90,4 +86,48 @@
   text-align: center;
   font-size: 14px;
   text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+  .entry {
+    padding-top: 232px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .entry {
+    padding-top: 56px;
+    align-items: center;
+  }
+
+  .entry__title {
+    padding-top: 50px;
+    padding-bottom: 75px;
+  }
+
+  .entry__label {
+    margin-top: 6px;
+  }
+
+  .entry__input {
+    width: 260px;
+  }
+
+  .entry__submit {
+    margin-top: 161px;
+    width: 260px;
+    font-size: 12px;
+  }
+
+  .entry__submit_with_indent {
+    margin-top: 250px;
+  }
+
+  .entry__question {
+    font-size: 12px;
+  }
+
+  .entry__link {
+    font-size: 12px;
+  }
 }

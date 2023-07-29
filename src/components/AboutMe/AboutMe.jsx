@@ -13,7 +13,7 @@ function AboutMe() {
         <p className="section-description me__description">
         Я&nbsp;живу в&nbsp;Санкт-Петербурге, закончила факультет информатики ЮУрГГПУ. Я&nbsp;замужем, и&nbsp;у&nbsp;нас двое сыновей. Люблю читать книжки детям и&nbsp;себе, а&nbsp;ещё долго гулять ногами по&nbsp;городу. Недавно решилась попробовать себя в&nbsp;веб-разработке и&nbsp;прошла учебный курс по&nbsp;этому направлению.
         </p>
-        <a className="each-link me__github" href="https://github.com/Kush-Mash">Github</a>
+        <a className="each-link me__github" href="https://github.com/Kush-Mash" target="blank">Github</a>
       </div>
       <Portfolio />
     </section>
