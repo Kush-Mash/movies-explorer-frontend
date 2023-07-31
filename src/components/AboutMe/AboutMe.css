@@ -1,0 +1,157 @@
+.me {
+  margin: 11px 0 0;
+}
+
+.me__box {
+  padding: 66px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(4, auto);
+  gap: 0 18vw;
+  grid-template-areas:
+  'title photo'
+  'subtitle photo'
+  'text photo'
+  'github photo';
+}
+
+.me__title {
+  margin: 0;
+  padding: 0;
+  max-width: 600px;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -2px;
+  grid-area: title;
+}
+
+.me__subtitle {
+  margin: 0;
+  padding: 18px 0 0;
+  max-width: 600px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.11;
+  grid-area: subtitle;
+}
+
+.me__description {
+  margin: 0;
+  padding: 26px 0 0;
+  max-width: 600px;
+  line-height: 1.57;
+  grid-area: text;
+}
+
+.me__github {
+  margin: 0;
+  padding: 99px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  color: #000;
+  text-decoration: none;
+  grid-area: github;
+}
+
+.me__photo {
+  display: block;
+  width: 270px;
+  border-radius: 10px;
+  object-fit: cover;
+  aspect-ratio: 270/327;
+  grid-area: photo;
+}
+
+@media screen and (max-width: 960px) {
+  .me {
+    margin-top: 0;
+  }
+
+  .me__box {
+    column-gap: 21vw;
+  }
+
+  .me__title {
+    max-width: 364px;
+    font-size: 40px;
+    line-height: 1;
+    letter-spacing: -1.6px;
+  }
+
+  .me__subtitle {
+    padding-top: 16px;
+    max-width: 364px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .me__description {
+    padding-top: 20px;
+    max-width: 364px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .me__github {
+    padding-top: 87px;
+  }
+
+  .me__photo {
+    width: 255px;
+  }
+}
+
+@media screen and (max-width: 775px) {
+  .me__box {
+    column-gap: 7vw;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .me__github {
+    padding-top: 9vw;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .me {
+    margin-top: 0;
+  }
+
+  .me__box {
+    padding-top: 60px;
+    display: block;
+  }
+
+  .me__photo {
+    margin: auto;
+  }
+
+  .me__title {
+    margin-top: 40px;
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: -1.2px;
+  }
+
+  .me__subtitle {
+    padding-top: 20px;
+  }
+
+  .me__description {
+    max-width: 100%;
+  }
+
+  .me__github {
+    display: block;
+    padding-top: 54px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .me__photo {
+    width: 100%;
+  }
+}

@@ -1,0 +1,45 @@
+.cards {
+  margin: 0 auto;
+  padding: 79px 70px 0;
+  max-width: 1280px;
+  box-sizing: border-box;
+}
+
+.cards__list {
+  margin: 0 auto;
+  padding: 0;
+}
+
+.cards__list_place_saved {
+  margin-bottom: 150px;
+}
+
+@media screen and (max-width: 960px) {
+  .cards {
+    padding-top: 70px;
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+
+  .cards__list_place_saved {
+    margin-bottom: 190px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .cards {
+    padding-top: 50px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .cards__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cards__list_place_saved {
+    margin-bottom: 179px;
+  }
+}

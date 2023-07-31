@@ -1,0 +1,21 @@
+.page {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  margin: 0;
+  min-width: 320px;
+  background-color: #FFFFFF;
+  color: #000000;
+  font-family: 'Inter', 'Arial', sans-serif;
+  cursor: auto;
+  box-sizing: border-box;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #F9F9F9 inset !important;
+  }

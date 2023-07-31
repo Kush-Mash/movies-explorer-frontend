@@ -1,0 +1,33 @@
+.more {
+  margin: 60px auto 80px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+  height: 36px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+  border-radius: 6px;
+  background: transparent;
+  border-color: #E8E8E8;
+  border-width: 1px;
+  border-style:solid;
+}
+
+@media screen and (max-width: 960px) {
+  .more {
+    margin-top: 80px;
+    margin-bottom: 100px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .more {
+    margin-top: 69px;
+    margin-bottom: 100px;
+    width: 240px;
+  }
+}
