@@ -22,5 +22,6 @@
 
 @import url(./components/UIComponents/FilterCheckbox/FilterCheckbox.css);
 @import url(./components/UIComponents/MoreButton/MoreButton.css);
+@import url(./components/UIComponents/Preloader/Preloader.css);
 
 @import url(./components/for-mixes/for-mixes.css);
