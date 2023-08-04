@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
+import * as auth from "../../utils/Auth.js";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer.jsx";
@@ -15,9 +16,15 @@ import { getMovies, MOVIES_PATH } from "../../utils/MoviesApi.js";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(false);
   const [allMovies, setAllMovies] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
+  const [formValue, setFormValue] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
   const location = useLocation().pathname;
   const locationWithHeader = ["/", "/movies", "/saved-movies", "/profile"];
@@ -67,10 +74,71 @@ function App() {
   //   }
   // };
 
+  useEffect(() => {
+    tokenCheck();
+  }, [])
+
+  const tokenCheck = () => {
+    const token = localStorage.getItem('jwt');
+    if (token){
+      auth.checkToken(token)
+        .then((res) => {
+          handleLogin();
+        })
+        .catch((err) => {
+          localStorage.removeItem('jwt');
+          console.log(err);
+        })
+    }
+  }
+
+  const handleLogin = () => {
+    setLoggedIn(true);
+  };
+
+  const onAuthSuccess = (res) => {
+    localStorage.setItem("jwt", res.token);
+    navigate('/movies', {replace: true});
+    handleLogin();
+  }
+
+  const handleChange = (evt) => {
+    const { name, value } = evt.target;
+
+    setFormValue({
+      ...formValue,
+      [name]: value,
+    });
+  };
+
+  const handleLoginSubmit = (evt) => {
+    evt.preventDefault();
+    auth
+      .authorize(formValue.email, formValue.password)
+      .then((res) => {
+        onAuthSuccess(res);
+        setFormValue({ email: "", password: "" });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleRegisterSubmit = (evt) => {
+    evt.preventDefault();
+    auth
+      .register(formValue.name, formValue.email, formValue.password)
+      .then((res) => {
+        onAuthSuccess(res);
+        setFormValue({ name: "", email: "", password: "" });
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        {locationWithHeader.includes(location) && <Header loggedIn={loggedIn} />}
+        {locationWithHeader.includes(location) && (
+          <Header loggedIn={loggedIn} />
+        )}
         <Routes>
           <Route path="/" element={<Main />} />
           <Route
@@ -85,8 +153,28 @@ function App() {
             path="/profile"
             element={<ProtectedRoute element={Profile} logout={logout} />}
           />
-          <Route path="/signup" element={<Register loggedIn={loggedIn} />} />
-          <Route path="/signin" element={<Login />} />
+          <Route
+            path="/signup"
+            element={
+              <Register
+                formValue={formValue}
+                handleLogin={handleLogin}
+                handleChange={handleChange}
+                handleSubmit={handleRegisterSubmit}
+              />
+            }
+          />
+          <Route
+            path="/signin"
+            element={
+              <Login
+                formValue={formValue}
+                handleLogin={handleLogin}
+                handleChange={handleChange}
+                handleSubmit={handleLoginSubmit}
+              />
+            }
+          />
           <Route exact path="/*" element={<PageNotFound />} />
         </Routes>
         {locationWithFooter.includes(location) && <Footer />}

@@ -6,10 +6,8 @@ const headers = {
 }
 
 export const getJson = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Ошибка: ${res.status}`);
+  if (res.ok) { return res.json() }
+  return Promise.reject(res.status);
 }
 
 export const register = (name, email, password) => {
@@ -28,7 +26,6 @@ export const authorize = (email, password) => {
     body: JSON.stringify({email, password})
   })
   .then(res => getJson(res))
-  .catch(err => console.log(err))
 };
 
 export const checkToken = (token) => {
