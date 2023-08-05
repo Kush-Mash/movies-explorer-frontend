@@ -30,37 +30,33 @@ function App() {
   const locationWithHeader = ["/", "/movies", "/saved-movies", "/profile"];
   const locationWithFooter = ["/", "/movies", "/saved-movies"];
 
-  function logout() {
-    setLoggedIn(false);
-  }
-
-  // Получаем массив с фильмами
-  const getMoviesArray = () => {
-    getMovies()
-      .then((moviesArray) => {
-        console.log(moviesArray);
-        const newMoviesArray = moviesArray.map((movie) => ({
-          country: movie.country,
-          description: movie.description,
-          director: movie.director,
-          duration: movie.duration,
-          movieId: movie.id,
-          image: MOVIES_PATH + movie.image.url,
-          nameEN: movie.nameEN,
-          nameRU: movie.nameRU,
-          trailerLink: movie.trailerLink,
-          year: movie.year,
-          thumbnail: MOVIES_PATH + movie.image.formats.thumbnail.url,
-        }));
-        // localStorage.setItem('movies', JSON.stringify(newMoviesArray));
-        // setAllMovies(newMoviesArray);
-      })
-      .catch((err) => {
-        console.log(err);
-        setAllMovies([]);
-      });
-  };
-  getMoviesArray();
+  // // Получаем массив с фильмами
+  // const getMoviesArray = () => {
+  //   getMovies()
+  //     .then((moviesArray) => {
+  //       console.log(moviesArray);
+  //       const newMoviesArray = moviesArray.map((movie) => ({
+  //         country: movie.country,
+  //         description: movie.description,
+  //         director: movie.director,
+  //         duration: movie.duration,
+  //         movieId: movie.id,
+  //         image: MOVIES_PATH + movie.image.url,
+  //         nameEN: movie.nameEN,
+  //         nameRU: movie.nameRU,
+  //         trailerLink: movie.trailerLink,
+  //         year: movie.year,
+  //         thumbnail: MOVIES_PATH + movie.image.formats.thumbnail.url,
+  //       }));
+  //       // localStorage.setItem('movies', JSON.stringify(newMoviesArray));
+  //       // setAllMovies(newMoviesArray);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       setAllMovies([]);
+  //     });
+  // };
+  // getMoviesArray();
 
   // // сохряняю все фильмы в стейт
   // const saveAllMovies = () => {
@@ -76,21 +72,22 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
-  }, [])
+  }, []);
 
   const tokenCheck = () => {
-    const token = localStorage.getItem('jwt');
-    if (token){
-      auth.checkToken(token)
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      auth
+        .checkToken(token)
         .then((res) => {
           handleLogin();
         })
         .catch((err) => {
-          localStorage.removeItem('jwt');
+          localStorage.removeItem("jwt");
           console.log(err);
-        })
+        });
     }
-  }
+  };
 
   const handleLogin = () => {
     setLoggedIn(true);
@@ -98,9 +95,9 @@ function App() {
 
   const onAuthSuccess = (res) => {
     localStorage.setItem("jwt", res.token);
-    navigate('/movies', {replace: true});
+    navigate("/movies", { replace: true });
     handleLogin();
-  }
+  };
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -133,6 +130,12 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+  function logout() {
+    localStorage.removeItem("jwt");
+    setLoggedIn(false);
+    navigate("/signin", { replace: true });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -149,10 +152,7 @@ function App() {
             path="/saved-movies"
             element={<ProtectedRoute element={SavedMovies} />}
           />
-          <Route
-            path="/profile"
-            element={<ProtectedRoute element={Profile} logout={logout} />}
-          />
+          <Route path="/profile" element={<Profile logout={logout} />} />
           <Route
             path="/signup"
             element={

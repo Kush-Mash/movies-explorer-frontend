@@ -35,15 +35,13 @@ function Profile({ logout }) {
             >
               Редактировать
             </button>
-            <Link to="/signin">
-              <button
-                className="each-button profile__logout"
-                type="button"
-                onClick={logout}
-              >
-                Выйти из&nbsp;аккаунта
-              </button>
-            </Link>
+            <button
+              className="each-button profile__logout"
+              type="button"
+              onClick={logout}
+            >
+              Выйти из&nbsp;аккаунта
+            </button>
           </>
         ) : (
           <>
