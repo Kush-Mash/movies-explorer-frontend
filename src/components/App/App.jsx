@@ -20,6 +20,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [allMovies, setAllMovies] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formValue, setFormValue] = useState({
     name: "",
     email: "",
@@ -27,8 +28,32 @@ function App() {
   });
 
   const location = useLocation().pathname;
-  const locationWithHeader = ["/", "/movies", "/saved-movies", "/profile"];
-  const locationWithFooter = ["/", "/movies", "/saved-movies"];
+  const locationsWithHeader = ["/", "/movies", "/saved-movies", "/profile"];
+  const locationsWithFooter = ["/", "/movies", "/saved-movies"];
+
+  const handleMenuToggle = () => { setIsMenuOpen(prevState => !prevState) };
+
+  // Слушатели для закрытия меню навигации
+  useEffect(() => {
+    const handleClickCloseMenu = (evt) => {
+      if (evt.target.classList.contains('navigation')) {
+        handleMenuToggle();
+      }
+    }
+
+    const handleEscCloseMenu = (evt) => {
+      if (isMenuOpen && evt.key === 'Escape') {
+        handleMenuToggle();
+      }
+    }
+    document.addEventListener('click', handleClickCloseMenu);
+    document.addEventListener('keydown', handleEscCloseMenu);
+
+    return () => {
+      document.removeEventListener('click', handleClickCloseMenu);
+      document.removeEventListener('keydown', handleEscCloseMenu);
+    };
+  })
 
   // // Получаем массив с фильмами
   // const getMoviesArray = () => {
@@ -139,20 +164,37 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        {locationWithHeader.includes(location) && (
-          <Header loggedIn={loggedIn} />
+        {locationsWithHeader.includes(location) && (
+          <Header loggedIn={loggedIn} isMenuOpen={isMenuOpen} handleMenuToggle={handleMenuToggle} />
         )}
         <Routes>
           <Route path="/" element={<Main />} />
           <Route
             path="/movies"
-            element={<ProtectedRoute element={Movies} allMovies={allMovies} />}
+            element={
+              <ProtectedRoute
+                element={Movies}
+                allMovies={allMovies}
+                loggedIn={loggedIn}
+              />
+            }
           />
           <Route
             path="/saved-movies"
-            element={<ProtectedRoute element={SavedMovies} />}
+            element={
+              <ProtectedRoute element={SavedMovies} loggedIn={loggedIn} />
+            }
           />
-          <Route path="/profile" element={<Profile logout={logout} />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute
+                element={Profile}
+                loggedIn={loggedIn}
+                logout={logout}
+              />
+            }
+          />
           <Route
             path="/signup"
             element={
@@ -177,7 +219,7 @@ function App() {
           />
           <Route exact path="/*" element={<PageNotFound />} />
         </Routes>
-        {locationWithFooter.includes(location) && <Footer />}
+        {locationsWithFooter.includes(location) && <Footer />}
       </div>
     </CurrentUserContext.Provider>
   );
