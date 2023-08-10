@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import * as auth from "../../utils/Auth.js";
+import { mainApi } from "../../utils/MainApi.js";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer.jsx";
@@ -11,89 +12,50 @@ import Register from "../Entry/Register.jsx";
 import Login from "../Entry/Login.jsx";
 import PageNotFound from "../PageNotFound/PageNotFound.jsx";
 import Profile from "../Profile/Profile.jsx";
-// import Preloader from "../UIComponents/Preloader/Preloader.jsx"
 import { getMovies, MOVIES_PATH } from "../../utils/MoviesApi.js";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
+import ProtectedRoute from "../../hooks/ProtectedRoute.js";
 
 function App() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
   const [allMovies, setAllMovies] = useState([]);
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [formValue, setFormValue] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
 
   const location = useLocation().pathname;
   const locationsWithHeader = ["/", "/movies", "/saved-movies", "/profile"];
   const locationsWithFooter = ["/", "/movies", "/saved-movies"];
 
-  const handleMenuToggle = () => { setIsMenuOpen(prevState => !prevState) };
+  const handleMenuToggle = () => {
+    setIsMenuOpen((prevState) => !prevState);
+  };
 
   // Слушатели для закрытия меню навигации
   useEffect(() => {
     const handleClickCloseMenu = (evt) => {
-      if (evt.target.classList.contains('navigation')) {
+      if (evt.target.classList.contains("navigation")) {
         handleMenuToggle();
       }
-    }
+    };
 
     const handleEscCloseMenu = (evt) => {
-      if (isMenuOpen && evt.key === 'Escape') {
+      if (isMenuOpen && evt.key === "Escape") {
         handleMenuToggle();
       }
-    }
-    document.addEventListener('click', handleClickCloseMenu);
-    document.addEventListener('keydown', handleEscCloseMenu);
+    };
+
+    document.addEventListener("click", handleClickCloseMenu);
+    document.addEventListener("keydown", handleEscCloseMenu);
 
     return () => {
-      document.removeEventListener('click', handleClickCloseMenu);
-      document.removeEventListener('keydown', handleEscCloseMenu);
+      document.removeEventListener("click", handleClickCloseMenu);
+      document.removeEventListener("keydown", handleEscCloseMenu);
     };
-  })
+  });
 
-  // // Получаем массив с фильмами
-  // const getMoviesArray = () => {
-  //   getMovies()
-  //     .then((moviesArray) => {
-  //       console.log(moviesArray);
-  //       const newMoviesArray = moviesArray.map((movie) => ({
-  //         country: movie.country,
-  //         description: movie.description,
-  //         director: movie.director,
-  //         duration: movie.duration,
-  //         movieId: movie.id,
-  //         image: MOVIES_PATH + movie.image.url,
-  //         nameEN: movie.nameEN,
-  //         nameRU: movie.nameRU,
-  //         trailerLink: movie.trailerLink,
-  //         year: movie.year,
-  //         thumbnail: MOVIES_PATH + movie.image.formats.thumbnail.url,
-  //       }));
-  //       // localStorage.setItem('movies', JSON.stringify(newMoviesArray));
-  //       // setAllMovies(newMoviesArray);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       setAllMovies([]);
-  //     });
-  // };
-  // getMoviesArray();
-
-  // // сохряняю все фильмы в стейт
-  // const saveAllMovies = () => {
-  //   if (allMovies < 1) {
-  //     const localStorageMovies = JSON.parse(localStorage.getItem('movies'));
-  //     if (!localStorageMovies) {
-  //       getMoviesArray();
-  //     } else {
-  //       getMoviesArray(localStorageMovies);
-  //     }
-  //   }
-  // };
+  React.useEffect(() => {
+    isMenuOpen && handleMenuToggle();
+  }, [location]);
 
   useEffect(() => {
     tokenCheck();
@@ -105,7 +67,7 @@ function App() {
       auth
         .checkToken(token)
         .then((res) => {
-          handleLogin();
+          setLoggedIn(true);
         })
         .catch((err) => {
           localStorage.removeItem("jwt");
@@ -114,58 +76,59 @@ function App() {
     }
   };
 
-  const handleLogin = () => {
-    setLoggedIn(true);
-  };
-
-  const onAuthSuccess = (res) => {
-    localStorage.setItem("jwt", res.token);
-    navigate("/movies", { replace: true });
-    handleLogin();
-  };
-
-  const handleChange = (evt) => {
-    const { name, value } = evt.target;
-
-    setFormValue({
-      ...formValue,
-      [name]: value,
-    });
-  };
-
-  const handleLoginSubmit = (evt) => {
-    evt.preventDefault();
+  const handleLogin = ({ email, password }) => {
     auth
-      .authorize(formValue.email, formValue.password)
+      .authorize(email, password)
       .then((res) => {
-        onAuthSuccess(res);
-        setFormValue({ email: "", password: "" });
+        localStorage.setItem("jwt", res.token);
+        navigate("/movies", { replace: true });
+        setLoggedIn(true);
+        console.log(res);
+        setCurrentUser(res);
       })
       .catch((err) => console.log(err));
   };
 
-  const handleRegisterSubmit = (evt) => {
-    evt.preventDefault();
+  const handleRegister = (data) => {
+    const { name, email, password } = data;
     auth
-      .register(formValue.name, formValue.email, formValue.password)
+      .register(name, email, password)
       .then((res) => {
-        onAuthSuccess(res);
-        setFormValue({ name: "", email: "", password: "" });
+        console.log(res);
+        setCurrentUser(res);
+        handleLogin({ email, password })
       })
       .catch((err) => console.log(err));
   };
 
-  function logout() {
+  const logOut = () => {
     localStorage.removeItem("jwt");
     setLoggedIn(false);
-    navigate("/signin", { replace: true });
-  }
+    setCurrentUser({});
+    navigate("/", { replace: true });
+  };
+
+  const handleUpdateUser = (newUserInfo) => {
+    mainApi
+      .updateUserInfo(newUserInfo)
+      .then((user) => {
+        setCurrentUser(user);
+        console.log(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         {locationsWithHeader.includes(location) && (
-          <Header loggedIn={loggedIn} isMenuOpen={isMenuOpen} handleMenuToggle={handleMenuToggle} />
+          <Header
+            loggedIn={loggedIn}
+            isMenuOpen={isMenuOpen}
+            handleMenuToggle={handleMenuToggle}
+          />
         )}
         <Routes>
           <Route path="/" element={<Main />} />
@@ -188,21 +151,22 @@ function App() {
           <Route
             path="/profile"
             element={
-              <ProtectedRoute
-                element={Profile}
-                loggedIn={loggedIn}
-                logout={logout}
-              />
+              // <ProtectedRoute
+              //   element={Profile}
+              //   logOut={logOut}
+              //   handleUpdate={handleUpdateUser}
+              // />
+              <Profile
+                logOut={logOut}
+                handleUpdate={handleUpdateUser}
+            />
             }
           />
           <Route
             path="/signup"
             element={
               <Register
-                formValue={formValue}
-                handleLogin={handleLogin}
-                handleChange={handleChange}
-                handleSubmit={handleRegisterSubmit}
+                handleRegister={handleRegister}
               />
             }
           />
@@ -210,10 +174,7 @@ function App() {
             path="/signin"
             element={
               <Login
-                formValue={formValue}
                 handleLogin={handleLogin}
-                handleChange={handleChange}
-                handleSubmit={handleLoginSubmit}
               />
             }
           />
