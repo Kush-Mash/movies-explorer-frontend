@@ -2,36 +2,35 @@ import { useContext, useState, useEffect } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import { useForm } from "../../hooks/useForm.js";
 
-function Profile({ loggedIn, logOut, handleUpdate, formValue }) {
+function Profile({ logOut, handleUpdate }) {
   const currentUser = useContext(CurrentUserContext);
-  const [initChange, setInitChange] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [isEditable, setIsEditable] = useState(false);
 
-  const { values, setValues, handleChange } = useForm();
+  const { values, setValues, handleChange } = useForm({
+    name: currentUser.name,
+    email: currentUser.email
+  });
 
   // Следим за актуальностью данных текущего юзера
   useEffect(() => {
-    // setName(currentUser.name);
-    // setEmail(currentUser.email);
     setValues(currentUser);
   }, [currentUser, setValues]);
 
-  function handleClickEditButton(event) {
-    event.preventDefault();
-    setInitChange(true);
+  const handleClickEditButton = (evt) => {
+    evt.preventDefault();
+    setIsEditable(true);
   }
 
-  function handleSubmit(evt) {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
-    setInitChange(false);
-    handleUpdate(name, email);
-  }
+    setIsEditable(false);
+    handleUpdate(values);
+  };
 
   return (
     <section className="profile">
       <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
-      <form className="form profile__form">
+      <form className="form profile__form" onSubmit={handleSubmit}>
         <label className="profile__label">
           Имя
           <input
@@ -43,6 +42,7 @@ function Profile({ loggedIn, logOut, handleUpdate, formValue }) {
             placeholder="Ваше имя"
             onChange={handleChange}
             value={values.name || ""}
+            disabled={!isEditable}
           />
         </label>
         <label className="profile__label">
@@ -54,9 +54,10 @@ function Profile({ loggedIn, logOut, handleUpdate, formValue }) {
             placeholder="Почта"
             onChange={handleChange}
             value={values.email || ""}
+            disabled={!isEditable}
           />
         </label>
-        {!initChange ? (
+        {!isEditable ? (
           <>
             <button
               className="each-button profile__button"

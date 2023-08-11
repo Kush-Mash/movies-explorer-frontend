@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import { useForm } from "../../hooks/useForm.js";
 
-function Login({ formValue, handleLogin }) {
+function Login({ handleLogin }) {
   const { values, setValues, handleChange } = useForm({ email: "", password: "" });
 
   const HandleSubmit = (evt) => {

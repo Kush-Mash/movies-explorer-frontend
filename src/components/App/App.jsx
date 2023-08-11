@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
-import * as auth from "../../utils/Auth.js";
+import { getMovies, MOVIES_PATH } from "../../utils/MoviesApi.js";
 import { mainApi } from "../../utils/MainApi.js";
+import * as auth from "../../utils/Auth.js";
+import errorMessages from "../../utils/errorMessages.js";
+import ProtectedRoute from "../../hooks/ProtectedRoute.js";
+import PageNotFound from "../PageNotFound/PageNotFound.jsx";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer.jsx";
@@ -10,10 +14,7 @@ import Movies from "../Movies/Movies.jsx";
 import SavedMovies from "../SavedMovies/SavedMovies.jsx";
 import Register from "../Entry/Register.jsx";
 import Login from "../Entry/Login.jsx";
-import PageNotFound from "../PageNotFound/PageNotFound.jsx";
 import Profile from "../Profile/Profile.jsx";
-import { getMovies, MOVIES_PATH } from "../../utils/MoviesApi.js";
-import ProtectedRoute from "../../hooks/ProtectedRoute.js";
 
 function App() {
   const navigate = useNavigate();
@@ -25,6 +26,79 @@ function App() {
   const location = useLocation().pathname;
   const locationsWithHeader = ["/", "/movies", "/saved-movies", "/profile"];
   const locationsWithFooter = ["/", "/movies", "/saved-movies"];
+
+  useEffect(() => {
+    if (loggedIn){
+      Promise.all([mainApi.getCurrentUser(), getMovies()])
+        .then(([user, movies]) => {
+          setCurrentUser(user);
+          console.log(movies);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
+    tokenCheck();
+  }, []);
+
+  const tokenCheck = () => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      auth
+        .checkToken(token)
+        .then((res) => {
+          setLoggedIn(true);
+        })
+        .catch((err) => {
+          localStorage.removeItem("jwt");
+          console.log(err);
+        });
+    }
+  };
+
+  const handleLogin = ({ email, password }) => {
+    auth
+      .authorize(email, password)
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
+        navigate("/movies", { replace: true });
+        setLoggedIn(true);
+        setCurrentUser(res);
+      })
+      .catch((err) => {
+
+        console.log(err)});
+  };
+
+  const handleRegister = ({ name, email, password }) => {
+    auth
+      .register(name, email, password)
+      .then((res) => {
+        setCurrentUser(res);
+        handleLogin({ email, password })
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const logOut = () => {
+    localStorage.removeItem("jwt");
+    setLoggedIn(false);
+    setCurrentUser({});
+    navigate("/", { replace: true });
+  };
+
+  const handleUpdateUser = ({ name, email }) => {
+    mainApi
+      .updateUserInfo(name, email)
+      .then((res) => {
+        setCurrentUser(res);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handleMenuToggle = () => {
     setIsMenuOpen((prevState) => !prevState);
@@ -56,69 +130,6 @@ function App() {
   React.useEffect(() => {
     isMenuOpen && handleMenuToggle();
   }, [location]);
-
-  useEffect(() => {
-    tokenCheck();
-  }, []);
-
-  const tokenCheck = () => {
-    const token = localStorage.getItem("jwt");
-    if (token) {
-      auth
-        .checkToken(token)
-        .then((res) => {
-          setLoggedIn(true);
-        })
-        .catch((err) => {
-          localStorage.removeItem("jwt");
-          console.log(err);
-        });
-    }
-  };
-
-  const handleLogin = ({ email, password }) => {
-    auth
-      .authorize(email, password)
-      .then((res) => {
-        localStorage.setItem("jwt", res.token);
-        navigate("/movies", { replace: true });
-        setLoggedIn(true);
-        console.log(res);
-        setCurrentUser(res);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const handleRegister = (data) => {
-    const { name, email, password } = data;
-    auth
-      .register(name, email, password)
-      .then((res) => {
-        console.log(res);
-        setCurrentUser(res);
-        handleLogin({ email, password })
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const logOut = () => {
-    localStorage.removeItem("jwt");
-    setLoggedIn(false);
-    setCurrentUser({});
-    navigate("/", { replace: true });
-  };
-
-  const handleUpdateUser = (newUserInfo) => {
-    mainApi
-      .updateUserInfo(newUserInfo)
-      .then((user) => {
-        setCurrentUser(user);
-        console.log(user);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
