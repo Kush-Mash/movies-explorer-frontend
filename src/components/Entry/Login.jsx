@@ -6,7 +6,8 @@ import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 function Login({ handleLogin }) {
   // const { values, setValues, handleChange } = useForm({ email: "", password: "" });
 
-  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation({ email: "", password: "" });
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation({ email: "", password: "" });
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -20,7 +21,9 @@ function Login({ handleLogin }) {
       </Link>
       <h1 className="entry__title">Рады видеть!</h1>
       <form className="form entry__form" onSubmit={handleSubmit}>
-        <label className="entry__label" htmlFor="email">E-mail</label>
+        <label className="entry__label" htmlFor="email">
+          E-mail
+        </label>
         <input
           className="entry__input"
           name="email"
@@ -31,7 +34,9 @@ function Login({ handleLogin }) {
           required
         />
         <span className="entry__error">{errors.email || ""}</span>
-        <label className="entry__label" htmlFor="password">Пароль</label>
+        <label className="entry__label" htmlFor="password">
+          Пароль
+        </label>
         <input
           className="entry__input"
           name="password"
@@ -50,7 +55,10 @@ function Login({ handleLogin }) {
         </button>
         <p className="entry__question">
           Ещё не&nbsp;зарегистрированы?
-          <Link to="/signup" className="each-link entry__link"> Регистрация</Link>
+          <Link to="/signup" className="each-link entry__link">
+            {" "}
+            Регистрация
+          </Link>
         </p>
       </form>
     </section>

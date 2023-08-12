@@ -6,7 +6,8 @@ import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 function Register({ formValue, handleRegister }) {
   // const { values, setValues, handleChange } = useForm({ name: "", email: "", password: "" });
 
-  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation({ email: "", password: "" });
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation({ email: "", password: "" });
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -20,7 +21,9 @@ function Register({ formValue, handleRegister }) {
       </Link>
       <h1 className="entry__title">Добро пожаловать!</h1>
       <form className="form entry__form" onSubmit={handleSubmit}>
-        <label className="entry__label" htmlFor="name">Имя</label>
+        <label className="entry__label" htmlFor="name">
+          Имя
+        </label>
         <input
           className="entry__input"
           name="name"
@@ -33,7 +36,9 @@ function Register({ formValue, handleRegister }) {
           required
         />
         <span className="entry__error">{errors.name || ""}</span>
-        <label className="entry__label" htmlFor="email">E-mail</label>
+        <label className="entry__label" htmlFor="email">
+          E-mail
+        </label>
         <input
           className="entry__input"
           name="email"
@@ -44,7 +49,9 @@ function Register({ formValue, handleRegister }) {
           required
         />
         <span className="entry__error">{errors.email || ""}</span>
-        <label className="entry__label" htmlFor="password">Пароль</label>
+        <label className="entry__label" htmlFor="password">
+          Пароль
+        </label>
         <input
           className="entry__input"
           name="password"
@@ -61,7 +68,10 @@ function Register({ formValue, handleRegister }) {
         </button>
         <p className="entry__question">
           Уже зарегистрированы?
-          <Link to="/signin" className="each-link entry__link"> Войти</Link>
+          <Link to="/signin" className="each-link entry__link">
+            {" "}
+            Войти
+          </Link>
         </p>
       </form>
     </section>

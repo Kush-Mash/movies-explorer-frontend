@@ -4,7 +4,7 @@ import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import { getMovies, MOVIES_PATH } from "../../utils/MoviesApi.js";
 import { mainApi } from "../../utils/MainApi.js";
 import * as auth from "../../utils/Auth.js";
-import errorMessages from "../../utils/errorMessages.js";
+import errList from "../../utils/errList.js";
 import ProtectedRoute from "../../hooks/ProtectedRoute.js";
 import PageNotFound from "../PageNotFound/PageNotFound.jsx";
 import Header from "../Header/Header.jsx";
@@ -22,6 +22,7 @@ function App() {
   const [allMovies, setAllMovies] = useState([]);
   const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [errMess, setErrMess] = useState({ err: false, mess: '' });
 
   const location = useLocation().pathname;
   const locationsWithHeader = ["/", "/movies", "/saved-movies", "/profile"];
@@ -67,7 +68,12 @@ function App() {
         setCurrentUser(res);
       })
       .catch((err) => {
-
+        if (err === 401) {
+          setErrMess({ err: true, mess: errList.incorrectLogin });
+        }
+        if (err === 500) {
+          setErrMess({ err: true, mess: errList.serverError });
+        }
         console.log(err)});
   };
 
@@ -78,7 +84,18 @@ function App() {
         setCurrentUser(res);
         handleLogin({ email, password })
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err === 400) {
+          setErrMess({ err: true, mess: errList.registerError });
+        }
+        if (err === 409) {
+          setErrMess({ err: true, mess: errList.conflict });
+        }
+        if (err === 500) {
+          setErrMess({ err: true, mess: errList.serverError });
+        }
+        console.log(err);
+      })
   };
 
   const logOut = () => {
@@ -96,6 +113,15 @@ function App() {
         console.log(res);
       })
       .catch((err) => {
+        if (err.includes('400')) {
+          setErrMess({ err: true, mess: errList.updateError });
+        }
+        if (err.includes('409')) {
+          setErrMess({ err: true, mess: errList.conflict });
+        }
+        if (err.includes('500')) {
+          setErrMess({ err: true, mess: errList.serverError });
+        }
         console.log(err);
       });
   };
@@ -166,10 +192,12 @@ function App() {
               //   element={Profile}
               //   logOut={logOut}
               //   handleUpdate={handleUpdateUser}
+              //   errMess={errMess}
               // />
               <Profile
                 logOut={logOut}
                 handleUpdate={handleUpdateUser}
+                errMess={errMess}
             />
             }
           />

@@ -3,7 +3,7 @@ import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import { useForm } from "../../hooks/useForm.js";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 
-function Profile({ logOut, handleUpdate }) {
+function Profile({ logOut, handleUpdate, errMess }) {
   const currentUser = useContext(CurrentUserContext);
   const [isEditable, setIsEditable] = useState(false);
 
@@ -13,10 +13,7 @@ function Profile({ logOut, handleUpdate }) {
   // });
 
   const { values, handleChange, errors, isValid, resetForm } =
-    useFormWithValidation({
-      name: currentUser.name,
-      email: currentUser.email,
-    });
+    useFormWithValidation({ email: "", password: "" });
 
   // // Следим за актуальностью данных текущего юзера
   // useEffect(() => {
@@ -93,7 +90,7 @@ function Profile({ logOut, handleUpdate }) {
           </>
         ) : (
           <>
-            <p className="profile__error">Произошла ошибка.</p>
+            <p className="profile__error">{errMess.mess}</p>
             <button
               className={`each-button profile__submit ${
                 !isValid ||
