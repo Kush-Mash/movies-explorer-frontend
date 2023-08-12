@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import { useForm } from "../../hooks/useForm.js";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 
 function Register({ formValue, handleRegister }) {
-  const { values, setValues, handleChange } = useForm();
+  // const { values, setValues, handleChange } = useForm({ name: "", email: "", password: "" });
 
-  const HandleSubmit = (evt) => {
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation({ email: "", password: "" });
+
+  const handleSubmit = (evt) => {
     evt.preventDefault();
     handleRegister(values);
   };
@@ -16,7 +19,7 @@ function Register({ formValue, handleRegister }) {
         <img className="each-button entry__logo" src={logo} alt="Логотип" />
       </Link>
       <h1 className="entry__title">Добро пожаловать!</h1>
-      <form className="form entry__form" onSubmit={HandleSubmit}>
+      <form className="form entry__form" onSubmit={handleSubmit}>
         <label className="entry__label" htmlFor="name">Имя</label>
         <input
           className="entry__input"
@@ -29,7 +32,7 @@ function Register({ formValue, handleRegister }) {
           onChange={handleChange}
           required
         />
-        <span className="entry__error">Что-то пошло не так...</span>
+        <span className="entry__error">{errors.name || ""}</span>
         <label className="entry__label" htmlFor="email">E-mail</label>
         <input
           className="entry__input"
@@ -40,7 +43,7 @@ function Register({ formValue, handleRegister }) {
           onChange={handleChange}
           required
         />
-        <span className="entry__error">Что-то пошло не так...</span>
+        <span className="entry__error">{errors.email || ""}</span>
         <label className="entry__label" htmlFor="password">Пароль</label>
         <input
           className="entry__input"
@@ -52,7 +55,7 @@ function Register({ formValue, handleRegister }) {
           onChange={handleChange}
           required
         />
-        <span className="entry__error">Что-то пошло не так...</span>
+        <span className="entry__error">{errors.password || ""}</span>
         <button className="each-button entry__submit" type="submit">
           Зарегистрироваться
         </button>

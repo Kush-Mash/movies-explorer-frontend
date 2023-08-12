@@ -11,5 +11,5 @@ export function useForm() {
     setValues({...values, [name]: value});
   };
 
-  return {values, setValues, handleChange };
+  return { values, setValues, handleChange };
 }
