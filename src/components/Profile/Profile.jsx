@@ -3,9 +3,9 @@ import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import { useForm } from "../../hooks/useForm.js";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 
-function Profile({ logOut, handleUpdate, errMess }) {
+function Profile({ logOut, handleUpdate, errMess, isEditable, setIsEditable }) {
   const currentUser = useContext(CurrentUserContext);
-  const [isEditable, setIsEditable] = useState(false);
+  // const [isEditable, setIsEditable] = useState(false);
 
   // const { values, setValues, handleChange } = useForm({
   //   name: currentUser.name,

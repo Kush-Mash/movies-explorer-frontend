@@ -23,6 +23,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [errMess, setErrMess] = useState({ err: false, mess: '' });
+  const [isEditable, setIsEditable] = useState(false);
 
   const location = useLocation().pathname;
   const locationsWithHeader = ["/", "/movies", "/saved-movies", "/profile"];
@@ -115,12 +116,15 @@ function App() {
       .catch((err) => {
         if (err.includes('400')) {
           setErrMess({ err: true, mess: errList.updateError });
+          setIsEditable(true);
         }
         if (err.includes('409')) {
           setErrMess({ err: true, mess: errList.conflict });
+          setIsEditable(true);
         }
         if (err.includes('500')) {
           setErrMess({ err: true, mess: errList.serverError });
+          setIsEditable(true);
         }
         console.log(err);
       });
@@ -198,6 +202,8 @@ function App() {
                 logOut={logOut}
                 handleUpdate={handleUpdateUser}
                 errMess={errMess}
+                isEditable={isEditable}
+                setIsEditable={setIsEditable}
             />
             }
           />
