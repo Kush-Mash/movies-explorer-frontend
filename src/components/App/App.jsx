@@ -30,7 +30,7 @@ function App() {
   const locationsWithFooter = ["/", "/movies", "/saved-movies"];
 
   useEffect(() => {
-    if (loggedIn){
+    if (loggedIn) {
       Promise.all([mainApi.getCurrentUser(), getMovies()])
         .then(([user, movies]) => {
           setCurrentUser(user);
@@ -69,7 +69,7 @@ function App() {
         setCurrentUser(res);
       })
       .catch((err) => {
-        if (err === 401) {
+        if (err === 400 || err === 401) {
           setErrMess({ err: true, mess: errList.incorrectLogin });
         }
         if (err === 500) {
@@ -129,6 +129,24 @@ function App() {
         console.log(err);
       });
   };
+
+  // Слушатели для очистки сообщений об ошибках
+  useEffect(() => {
+    setErrMess({ err: false, mess: '' });
+    setIsEditable(false);
+  }, [location])
+
+  useEffect(() => {
+    const handleClearErr = (evt) => {
+      if (evt.target.classList.contains(("entry__input") || ("profile__input"))) {
+        setErrMess({ err: false, mess: '' });
+      }
+    }
+    document.addEventListener("click", handleClearErr);
+    return () => {
+      document.removeEventListener("click", handleClearErr);
+    }
+  })
 
   const handleMenuToggle = () => {
     setIsMenuOpen((prevState) => !prevState);
@@ -192,19 +210,16 @@ function App() {
           <Route
             path="/profile"
             element={
-              // <ProtectedRoute
-              //   element={Profile}
-              //   logOut={logOut}
-              //   handleUpdate={handleUpdateUser}
-              //   errMess={errMess}
-              // />
-              <Profile
+              <ProtectedRoute
+                element={Profile}
+                loggedIn={loggedIn}
                 logOut={logOut}
                 handleUpdate={handleUpdateUser}
                 errMess={errMess}
+                setErrMess={setErrMess}
                 isEditable={isEditable}
                 setIsEditable={setIsEditable}
-            />
+              />
             }
           />
           <Route
@@ -212,6 +227,7 @@ function App() {
             element={
               <Register
                 handleRegister={handleRegister}
+                errMess={errMess}
               />
             }
           />
@@ -220,6 +236,7 @@ function App() {
             element={
               <Login
                 handleLogin={handleLogin}
+                errMess={errMess}
               />
             }
           />

@@ -3,22 +3,10 @@ import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import { useForm } from "../../hooks/useForm.js";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 
-function Profile({ logOut, handleUpdate, errMess, isEditable, setIsEditable }) {
+function Profile({ logOut, handleUpdate, errMess, setErrMess, isEditable, setIsEditable }) {
   const currentUser = useContext(CurrentUserContext);
-  // const [isEditable, setIsEditable] = useState(false);
-
-  // const { values, setValues, handleChange } = useForm({
-  //   name: currentUser.name,
-  //   email: currentUser.email
-  // });
-
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation({ email: "", password: "" });
-
-  // // Следим за актуальностью данных текущего юзера
-  // useEffect(() => {
-  //   setValues(currentUser);
-  // }, [currentUser, setValues]);
 
   useEffect(() => {
     if (currentUser) {
@@ -53,7 +41,7 @@ function Profile({ logOut, handleUpdate, errMess, isEditable, setIsEditable }) {
             onChange={handleChange}
             value={values.name || ""}
             disabled={!isEditable}
-            // pattern="[а-яА-Яa-zA-Z -]{1,}"
+            pattern="[а-яёА-ЯЁa-zA-Z \-]{1,}"
           />
         </label>
         <p className="profile__warning">{errors.name || ""}</p>
@@ -67,7 +55,7 @@ function Profile({ logOut, handleUpdate, errMess, isEditable, setIsEditable }) {
             onChange={handleChange}
             value={values.email || ""}
             disabled={!isEditable}
-            // pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
           />
         </label>
         <p className="profile__warning">{errors.email || ""}</p>

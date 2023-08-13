@@ -3,7 +3,7 @@ import logo from "../../images/logo.svg";
 import { useForm } from "../../hooks/useForm.js";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 
-function Login({ handleLogin }) {
+function Login({ handleLogin, errMess }) {
   // const { values, setValues, handleChange } = useForm({ email: "", password: "" });
 
   const { values, handleChange, errors, isValid, resetForm } =
@@ -31,6 +31,7 @@ function Login({ handleLogin }) {
           placeholder="E-mail"
           value={values.email || ""}
           onChange={handleChange}
+          pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
           required
         />
         <span className="entry__error">{errors.email || ""}</span>
@@ -47,18 +48,16 @@ function Login({ handleLogin }) {
           required
         />
         <span className="entry__error">{errors.password || ""}</span>
+        <p className="entry__err-mess entry__err-mess_with_indent">{errMess.mess}</p>
         <button
-          className="each-button entry__submit entry__submit_with_indent"
+          className="each-button entry__submit"
           type="submit"
         >
           Войти
         </button>
         <p className="entry__question">
           Ещё не&nbsp;зарегистрированы?
-          <Link to="/signup" className="each-link entry__link">
-            {" "}
-            Регистрация
-          </Link>
+          <Link to="/signup" className="each-link entry__link"> Регистрация</Link>
         </p>
       </form>
     </section>

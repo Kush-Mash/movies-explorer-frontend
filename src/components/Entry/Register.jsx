@@ -3,7 +3,7 @@ import logo from "../../images/logo.svg";
 import { useForm } from "../../hooks/useForm.js";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 
-function Register({ formValue, handleRegister }) {
+function Register({ handleRegister, errMess }) {
   // const { values, setValues, handleChange } = useForm({ name: "", email: "", password: "" });
 
   const { values, handleChange, errors, isValid, resetForm } =
@@ -33,6 +33,7 @@ function Register({ formValue, handleRegister }) {
           maxLength="30"
           value={values.name || ""}
           onChange={handleChange}
+          pattern="[а-яёА-ЯЁa-zA-Z \-]{1,}"
           required
         />
         <span className="entry__error">{errors.name || ""}</span>
@@ -46,6 +47,7 @@ function Register({ formValue, handleRegister }) {
           placeholder="E-mail"
           value={values.email || ""}
           onChange={handleChange}
+          pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
           required
         />
         <span className="entry__error">{errors.email || ""}</span>
@@ -63,6 +65,7 @@ function Register({ formValue, handleRegister }) {
           required
         />
         <span className="entry__error">{errors.password || ""}</span>
+        <p className="entry__err-mess">{errMess.mess}</p>
         <button className="each-button entry__submit" type="submit">
           Зарегистрироваться
         </button>
