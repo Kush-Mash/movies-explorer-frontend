@@ -1,8 +1,9 @@
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import pic from "../../images/pic__COLOR_pic.png";
+import { getMovies, MOVIES_PATH } from "../../utils/MoviesApi.js";
 
-function MoviesCard() {
+function MoviesCard({ movie }) {
   const location = useLocation();
   const [isLiked, setIsLiked] = useState(false);
 
@@ -10,10 +11,16 @@ function MoviesCard() {
     setIsLiked(!isLiked);
   }
 
+  const convertDuration = () => {
+    const hours = Math.floor(movie.duration / 60);
+    const minutes = movie.duration % 60;
+    return `${hours}ч ${minutes}м`;
+  };
+
   return (
     <li className="card">
-      <h2 className="card__title">33 слова о дизайне</h2>
-      <p className="card__subtitle">111</p>
+      <h2 className="card__title">{movie.nameRU}</h2>
+      <p className="card__subtitle">{convertDuration}</p>
       {location.pathname === "/saved-movies" ? (
         <button
           className="each-button card__like card__like_status_delete"
@@ -30,7 +37,7 @@ function MoviesCard() {
           onClick={handleLikeClick}
         ></button>
       )}
-      <img className="card__img" alt="Превью фильма" src={pic}></img>
+      <img className="card__img" alt={movie.nameRU} src={MOVIES_PATH + movie.image.formats.thumbnail.url}></img>
     </li>
   );
 }

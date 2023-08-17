@@ -3,9 +3,7 @@ import logo from "../../images/logo.svg";
 import { useForm } from "../../hooks/useForm.js";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 
-function Register({ handleRegister, errMess }) {
-  // const { values, setValues, handleChange } = useForm({ name: "", email: "", password: "" });
-
+function Register({ handleRegister, errMess, clearErr }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation({ email: "", password: "" });
 
@@ -33,6 +31,7 @@ function Register({ handleRegister, errMess }) {
           maxLength="30"
           value={values.name || ""}
           onChange={handleChange}
+          onFocus={clearErr}
           pattern="[а-яёА-ЯЁa-zA-Z \-]{1,}"
           required
         />
@@ -47,6 +46,7 @@ function Register({ handleRegister, errMess }) {
           placeholder="E-mail"
           value={values.email || ""}
           onChange={handleChange}
+          onFocus={clearErr}
           pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
           required
         />
@@ -62,6 +62,7 @@ function Register({ handleRegister, errMess }) {
           minLength="8"
           value={values.password || ""}
           onChange={handleChange}
+          onFocus={clearErr}
           required
         />
         <span className="entry__error">{errors.password || ""}</span>

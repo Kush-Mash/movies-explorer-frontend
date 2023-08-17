@@ -1,10 +1,10 @@
 import FilterCheckbox from "../UIComponents/FilterCheckbox/FilterCheckbox.jsx";
 
-function SearchForm() {
+function SearchForm({ allMovies }) {
   return (
     <section className="search">
       <div className="search__box">
-        <form className="search__form">
+        <form className="search__form" name="search">
           <div className="search__unit">
             <input
               className="search__input"

@@ -22,12 +22,50 @@ function App() {
   const [allMovies, setAllMovies] = useState([]);
   const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [errMess, setErrMess] = useState({ err: false, mess: '' });
+  const [errMess, setErrMess] = useState({ err: false, mess: "" });
   const [isEditable, setIsEditable] = useState(false);
 
   const location = useLocation().pathname;
   const locationsWithHeader = ["/", "/movies", "/saved-movies", "/profile"];
   const locationsWithFooter = ["/", "/movies", "/saved-movies"];
+
+  const getMoviesArray = () => {
+    getMovies()
+      .then((moviesArray) => {
+        console.log(moviesArray);
+        const newMoviesArray = moviesArray.map((movie) => ({
+          country: movie.country,
+          description: movie.description,
+          director: movie.director,
+          duration: movie.duration,
+          movieId: movie.id,
+          image: MOVIES_PATH + movie.image.url,
+          nameEN: movie.nameEN,
+          nameRU: movie.nameRU,
+          trailerLink: movie.trailerLink,
+          year: movie.year,
+          thumbnail: MOVIES_PATH + movie.image.formats.thumbnail.url,
+        }));
+        localStorage.setItem("movies", JSON.stringify(newMoviesArray));
+        setAllMovies(newMoviesArray);
+        console.log(newMoviesArray);
+      })
+      .catch((err) => {
+        console.log(err);
+        setAllMovies([]);
+      });
+  };
+
+  const keepMoviesArray = () => {
+    if (allMovies < 1) {
+      const keepingMovies = JSON.parse(localStorage.getItem("movies"));
+      if (!keepingMovies) {
+        getMoviesArray();
+      } else {
+        setAllMovies(keepingMovies);
+      }
+    }
+  };
 
   useEffect(() => {
     if (loggedIn) {
@@ -35,8 +73,13 @@ function App() {
         .then(([user, movies]) => {
           setCurrentUser(user);
           console.log(movies);
+          setAllMovies(movies);
+          console.log(allMovies);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          setAllMovies([]);
+        });
     }
   }, [loggedIn]);
 
@@ -75,7 +118,8 @@ function App() {
         if (err === 500) {
           setErrMess({ err: true, mess: errList.serverError });
         }
-        console.log(err)});
+        console.log(err);
+      });
   };
 
   const handleRegister = ({ name, email, password }) => {
@@ -83,7 +127,7 @@ function App() {
       .register(name, email, password)
       .then((res) => {
         setCurrentUser(res);
-        handleLogin({ email, password })
+        handleLogin({ email, password });
       })
       .catch((err) => {
         if (err === 400) {
@@ -96,7 +140,7 @@ function App() {
           setErrMess({ err: true, mess: errList.serverError });
         }
         console.log(err);
-      })
+      });
   };
 
   const logOut = () => {
@@ -114,15 +158,15 @@ function App() {
         console.log(res);
       })
       .catch((err) => {
-        if (err.includes('400')) {
+        if (err === 400) {
           setErrMess({ err: true, mess: errList.updateError });
           setIsEditable(true);
         }
-        if (err.includes('409')) {
+        if (err === 409) {
           setErrMess({ err: true, mess: errList.conflict });
           setIsEditable(true);
         }
-        if (err.includes('500')) {
+        if (err === 500) {
           setErrMess({ err: true, mess: errList.serverError });
           setIsEditable(true);
         }
@@ -130,26 +174,33 @@ function App() {
       });
   };
 
-  // Слушатели для очистки сообщений об ошибках
-  useEffect(() => {
-    setErrMess({ err: false, mess: '' });
-    setIsEditable(false);
-  }, [location])
-
-  useEffect(() => {
-    const handleClearErr = (evt) => {
-      if (evt.target.classList.contains(("entry__input") || ("profile__input"))) {
-        setErrMess({ err: false, mess: '' });
-      }
-    }
-    document.addEventListener("click", handleClearErr);
-    return () => {
-      document.removeEventListener("click", handleClearErr);
-    }
-  })
-
   const handleMenuToggle = () => {
     setIsMenuOpen((prevState) => !prevState);
+  };
+
+  // Дефолт при смене страницы
+  useEffect(() => {
+    setErrMess({ err: false, mess: "" });
+    setIsEditable(false);
+    isMenuOpen && handleMenuToggle();
+  }, [location]);
+
+  // // Слушатели для очистки сообщений об ошибках
+  // useEffect(() => {
+  //   const arr = ["profile__input", "entry__input"];
+  //   const handleClearErr = (evt) => {
+  //     if (evt.target.classList.some((c) => arr.includes(c))) {
+  //       setErrMess({ err: false, mess: "" });
+  //     }
+  //   };
+  //   document.addEventListener("click", handleClearErr);
+  //   return () => {
+  //     document.removeEventListener("click", handleClearErr);
+  //   };
+  // });
+
+  const clearErr = () => {
+    setErrMess({ err: false, mess: "" });
   };
 
   // Слушатели для закрытия меню навигации
@@ -175,10 +226,6 @@ function App() {
     };
   });
 
-  React.useEffect(() => {
-    isMenuOpen && handleMenuToggle();
-  }, [location]);
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -196,8 +243,8 @@ function App() {
             element={
               <ProtectedRoute
                 element={Movies}
-                allMovies={allMovies}
                 loggedIn={loggedIn}
+                allMovies={allMovies}
               />
             }
           />
@@ -219,6 +266,7 @@ function App() {
                 setErrMess={setErrMess}
                 isEditable={isEditable}
                 setIsEditable={setIsEditable}
+                clearErr={clearErr}
               />
             }
           />
@@ -228,6 +276,7 @@ function App() {
               <Register
                 handleRegister={handleRegister}
                 errMess={errMess}
+                clearErr={clearErr}
               />
             }
           />
@@ -237,6 +286,7 @@ function App() {
               <Login
                 handleLogin={handleLogin}
                 errMess={errMess}
+                clearErr={clearErr}
               />
             }
           />

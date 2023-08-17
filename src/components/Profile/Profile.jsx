@@ -3,7 +3,7 @@ import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import { useForm } from "../../hooks/useForm.js";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 
-function Profile({ logOut, handleUpdate, errMess, setErrMess, isEditable, setIsEditable }) {
+function Profile({ logOut, handleUpdate, errMess, isEditable, setIsEditable, clearErr }) {
   const currentUser = useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation({ email: "", password: "" });
@@ -39,6 +39,7 @@ function Profile({ logOut, handleUpdate, errMess, setErrMess, isEditable, setIsE
             maxLength="30"
             placeholder="Ваше имя"
             onChange={handleChange}
+            onFocus={clearErr}
             value={values.name || ""}
             disabled={!isEditable}
             pattern="[а-яёА-ЯЁa-zA-Z \-]{1,}"
@@ -53,6 +54,7 @@ function Profile({ logOut, handleUpdate, errMess, setErrMess, isEditable, setIsE
             type="email"
             placeholder="Почта"
             onChange={handleChange}
+            onFocus={clearErr}
             value={values.email || ""}
             disabled={!isEditable}
             pattern="[^@\s]+@[^@\s]+\.[^@\s]+"

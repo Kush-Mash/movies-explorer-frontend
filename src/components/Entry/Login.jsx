@@ -3,7 +3,7 @@ import logo from "../../images/logo.svg";
 import { useForm } from "../../hooks/useForm.js";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 
-function Login({ handleLogin, errMess }) {
+function Login({ handleLogin, errMess, clearErr }) {
   // const { values, setValues, handleChange } = useForm({ email: "", password: "" });
 
   const { values, handleChange, errors, isValid, resetForm } =
@@ -31,6 +31,7 @@ function Login({ handleLogin, errMess }) {
           placeholder="E-mail"
           value={values.email || ""}
           onChange={handleChange}
+          onFocus={clearErr}
           pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
           required
         />
@@ -43,8 +44,10 @@ function Login({ handleLogin, errMess }) {
           name="password"
           type="password"
           placeholder="Пароль"
+          minLength="8"
           value={values.password || ""}
           onChange={handleChange}
+          onFocus={clearErr}
           required
         />
         <span className="entry__error">{errors.password || ""}</span>

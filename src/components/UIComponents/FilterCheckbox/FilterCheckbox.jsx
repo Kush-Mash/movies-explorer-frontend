@@ -1,6 +1,9 @@
 function FilterCheckbox() {
   return (
-    <input className="each-button checkbox" type="checkbox" />
+    <input
+      className="each-button checkbox"
+      type="checkbox"
+    />
   );
 }
 
