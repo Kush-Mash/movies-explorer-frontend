@@ -20,10 +20,11 @@ function App() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
   const [allMovies, setAllMovies] = useState([]);
-  const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
+  const [currentUser, setCurrentUser] = useState({ name: "", email: "", _id: "" });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [errMess, setErrMess] = useState({ err: false, mess: "" });
   const [isEditable, setIsEditable] = useState(false);
+  const [addedMovies, setAddedMovies] = useState([]);
 
   const location = useLocation().pathname;
   const locationsWithHeader = ["/", "/movies", "/saved-movies", "/profile"];
@@ -67,6 +68,33 @@ function App() {
     }
   };
 
+  const handleAddMovie = (movie) => {
+    mainApi
+      .addMovie(movie)
+      .then((addedMovie) => {
+        if (addedMovie) {
+          setAddedMovies([...addedMovies, addedMovie.data]);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleDeleteMovie = (movie) => {
+    const deletingMovie = addedMovies.find((m) => m.movieId === movie.movieId);
+    console.log(deletingMovie);
+    mainApi
+      .deleteMovie(deletingMovie.id)
+      .then(() => {
+        setAddedMovies((item) =>
+          item.filter((m) => m.movieId !== movie.movieId)
+        );
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const isLiked = (movie) =>
+    addedMovies.some((addedMovie) => addedMovie.id === movie.id);
+
   useEffect(() => {
     if (loggedIn) {
       Promise.all([mainApi.getCurrentUser(), getMovies()])
@@ -84,10 +112,10 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    tokenCheck();
+    checkToken();
   }, []);
 
-  const tokenCheck = () => {
+  const checkToken = () => {
     const token = localStorage.getItem("jwt");
     if (token) {
       auth
@@ -245,13 +273,23 @@ function App() {
                 element={Movies}
                 loggedIn={loggedIn}
                 allMovies={allMovies}
+                addMovie={handleAddMovie}
+                deleteMovie={handleDeleteMovie}
+                isLiked={isLiked}
               />
             }
           />
           <Route
             path="/saved-movies"
             element={
-              <ProtectedRoute element={SavedMovies} loggedIn={loggedIn} />
+              <ProtectedRoute
+                element={SavedMovies}
+                loggedIn={loggedIn}
+                addedMovies={addedMovies}
+                addMovie={handleAddMovie}
+                deleteMovie={handleDeleteMovie}
+                isLiked={isLiked}
+              />
             }
           />
           <Route
