@@ -10,10 +10,10 @@ function SavedMovies({
   handleChange,
   filter,
   search,
-  searchTearm
+  searchTearm,
 }) {
   return (
-    <>
+    <main>
       <SearchForm
         movies={addedMovies}
         search={search}
@@ -22,6 +22,9 @@ function SavedMovies({
         searchTearm={searchTearm}
         isShort={isShort}
       />
+      <p className="message">
+        {addedMovies.length === 0 && "Список сохранённых фильмов пуст"}
+      </p>
       <MoviesCardList
         more={"cards__list_place_saved"}
         moviesArray={addedMovies}
@@ -29,7 +32,7 @@ function SavedMovies({
         deleteMovie={deleteMovie}
         isLiked={isLiked}
       />
-    </>
+    </main>
   );
 }
 

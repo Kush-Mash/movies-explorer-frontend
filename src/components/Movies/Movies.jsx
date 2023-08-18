@@ -14,7 +14,7 @@ function Movies({
   searchTearm
 }) {
   return (
-    <>
+    <main>
       <SearchForm
         movies={allMovies}
         search={search}
@@ -23,6 +23,9 @@ function Movies({
         searchTearm={searchTearm}
         isShort={isShort}
       />
+      <p className="message">
+        {((allMovies.length === 0) && 'Нужно ввести ключевое слово')}
+      </p>
       <MoviesCardList
         more={""}
         moviesArray={allMovies}
@@ -31,7 +34,7 @@ function Movies({
         isLiked={isLiked}
       />
       <MoreButton />
-    </>
+    </main>
   );
 }
 
