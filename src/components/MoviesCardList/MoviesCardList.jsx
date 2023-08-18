@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList({ more, moviesArray, addMovie, deleteMovie, isLiked }) {

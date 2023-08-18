@@ -1,13 +1,10 @@
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
-import pic from "../../images/pic__COLOR_pic.png";
-import { getMovies, MOVIES_PATH } from "../../utils/MoviesApi.js";
 
 function MoviesCard({ movie, addMovie, deleteMovie, isLiked }) {
   const location = useLocation();
 
   const handleLikeClick = () =>
-    !isLiked ? addMovie(movie) : deleteMovie(movie);
+    !isLiked(movie) ? addMovie(movie) : deleteMovie(movie);
 
   const convertDuration = () => {
     const hours = Math.floor(movie.duration / 60);
@@ -38,7 +35,7 @@ function MoviesCard({ movie, addMovie, deleteMovie, isLiked }) {
       <img
         className="card__img"
         alt={movie.nameRU}
-        src={MOVIES_PATH + movie.image.formats.thumbnail.url}
+        src={movie.thumbnail}
       ></img>
     </li>
   );
