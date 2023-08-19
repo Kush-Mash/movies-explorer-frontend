@@ -6,11 +6,9 @@ function MoviesCard({ movie, addMovie, deleteMovie, isLiked }) {
   const handleLikeClick = () =>
     !isLiked(movie) ? addMovie(movie) : deleteMovie(movie);
 
-  const convertDuration = () => {
-    const hours = Math.floor(movie.duration / 60);
-    const minutes = movie.duration % 60;
-    return `${hours}ч ${minutes}м`;
-  };
+  const convertDuration = (`
+  ${Math.floor(movie.duration / 60)}ч
+  ${movie.duration % 60}м`);
 
   return (
     <li className="card">
@@ -21,11 +19,12 @@ function MoviesCard({ movie, addMovie, deleteMovie, isLiked }) {
           className="each-button card__like card__like_status_delete"
           type="button"
           aria-label="Удалить из избранного"
+          onClick={handleLikeClick}
         ></button>
       ) : (
         <button
           className={`each-button card__like ${
-            isLiked ? "card__like_status_active" : "card__like_status_inactive"
+            isLiked(movie) ? "card__like_status_active" : "card__like_status_inactive"
           }`}
           type="button"
           aria-label="Добавить в избранное"

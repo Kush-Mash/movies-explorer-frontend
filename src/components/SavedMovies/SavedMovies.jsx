@@ -8,7 +8,6 @@ function SavedMovies({
   isLiked,
   isShort,
   handleChange,
-  filter,
   search,
   searchTearm,
 }) {
@@ -18,7 +17,6 @@ function SavedMovies({
         movies={addedMovies}
         search={search}
         handleChange={handleChange}
-        filter={filter}
         searchTearm={searchTearm}
         isShort={isShort}
       />

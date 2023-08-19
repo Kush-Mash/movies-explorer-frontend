@@ -9,9 +9,8 @@ function Movies({
   isLiked,
   isShort,
   handleChange,
-  filter,
   search,
-  searchTearm
+  searchTearm,
 }) {
   return (
     <main>
@@ -19,12 +18,11 @@ function Movies({
         movies={allMovies}
         search={search}
         handleChange={handleChange}
-        filter={filter}
         searchTearm={searchTearm}
         isShort={isShort}
       />
       <p className="message">
-        {((allMovies.length === 0) && 'Нужно ввести ключевое слово')}
+        {allMovies.length === 0 && "Нужно ввести ключевое слово"}
       </p>
       <MoviesCardList
         more={""}

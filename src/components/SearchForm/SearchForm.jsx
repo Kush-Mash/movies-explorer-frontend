@@ -1,13 +1,6 @@
 import FilterCheckbox from "../UIComponents/FilterCheckbox/FilterCheckbox.jsx";
 
-function SearchForm({ allMovies, search, handleChange, filter, searchTearm, isShort }) {
-  const handleChangeFilter = (evt) => {
-    filter(evt);
-    search(allMovies);
-  };
-  const handleChangeSearch = (evt) => {
-    handleChange(evt);
-  };
+function SearchForm({ allMovies, search, handleChange, searchTearm }) {
   const handleSearch = (evt) => {
     evt.preventDefault();
     search(allMovies);
@@ -22,12 +15,12 @@ function SearchForm({ allMovies, search, handleChange, filter, searchTearm, isSh
               type="text"
               placeholder="Фильм"
               value={searchTearm}
-              onChange={handleChangeSearch}
+              onChange={handleChange}
             />
             <button className="each-button search__submit" type="submit"></button>
           </div>
           <label className="search__filter" htmlFor="checkbox">
-            <FilterCheckbox  handleChange={handleChangeFilter} isShort={isShort} />
+            <FilterCheckbox />
             <span className="search__condition">Короткометражки</span>
           </label>
         </form>
