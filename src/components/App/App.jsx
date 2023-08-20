@@ -19,6 +19,7 @@ import Preloader from "../UIComponents/Preloader/Preloader.jsx";
 
 function App() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     name: "",
@@ -36,8 +37,12 @@ function App() {
   const [isShortAdded, setIsShortAdded] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchTermInAdded, setSearchTermInAdded] = useState("");
-  const [loading, setLoading] = useState(true);
-
+  const [previousSearch, setPreviousSearch] = useState({
+    searchTerm: "",
+    isFirst: true,
+    isShort: false,
+    movies: [],
+  });
 
   const location = useLocation().pathname;
   const locationsWithHeader = ["/", "/movies", "/saved-movies", "/profile"];
@@ -85,9 +90,12 @@ function App() {
   };
 
   const logOut = () => {
-    localStorage.removeItem("jwt");
+    localStorage.clear();
     setLoggedIn(false);
     setCurrentUser({});
+    setIsShort(false);
+    setAllMovies([]);
+    setAddedMovies([]);
     navigate("/", { replace: true });
   };
 
@@ -118,7 +126,7 @@ function App() {
   const tokenCheck = () => {
     const token = localStorage.getItem("jwt");
     if (!token) {
-      return setLoading(false);
+      return setIsLoading(false);
     }
     auth
       .checkToken(token)
@@ -129,7 +137,7 @@ function App() {
         localStorage.removeItem("jwt");
         console.log(err);
       })
-      .finally(() => setLoading(false));
+      .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
@@ -145,10 +153,17 @@ function App() {
           console.log(movies);
           setAddedMovies(movies);
           console.log(addedMovies);
+          setFoundInAddedMovies(movies);
         })
         .catch((err) => {
           console.log(err);
         });
+        const prevSearch = JSON.parse(localStorage.getItem("previousSearch"));
+        if (prevSearch) {
+          setSearchTerm(prevSearch.searchTerm);
+          setFoundInAllMovies(prevSearch.movies);
+          setIsShort(prevSearch.isShort);
+        }
     }
   }, [loggedIn]);
 
@@ -224,29 +239,74 @@ function App() {
   const handleChangeInAll = (evt) => setSearchTerm(evt.target.value);
   const handleChangeInAdded = (evt) => setSearchTermInAdded(evt.target.value);
 
-  const filterMovies = (movies, searchTerm) => {
-    const takenMovie = movies.filter((movie) =>
-      movie.nameEN.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      movie.nameRU.toLowerCase().includes(searchTerm.toLowerCase())
+  // чекбоксы
+  const handleFilterInAll = () => setIsShort(!isShort);
+  const handleFilterInAdded = () => setIsShortAdded(!isShortAdded);
+
+  const filterMovies = (movies, searchTerm, isShort, record) => {
+    const takenMovies = movies.filter((movie) =>
+    (isShort
+      ? movie.duration <= 40 &&
+        (movie.nameEN.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        movie.nameRU.toLowerCase().includes(searchTerm.toLowerCase()))
+      : movie.nameEN.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        movie.nameRU.toLowerCase().includes(searchTerm.toLowerCase()))
     );
-    return takenMovie;
+    record(takenMovies);
   };
 
+  // запомнить поисковый запрос и фильмы
+  const recordPreviousSearch = (takenMovies) => {
+    setFoundInAllMovies(takenMovies);
+    setPreviousSearch({
+      searchTerm,
+      isFirst: false,
+      isShort,
+      movies: takenMovies,
+    })
+  }
+
+  const recordSearchInAdded = (takenMovies) => {
+    setFoundInAddedMovies(takenMovies);
+  }
+
+  // поиск среди всех
   const handleAllMoviesSearch = () => {
     keepMoviesArray();
-    const filteredMovies = filterMovies(
+    filterMovies(
       allMovies,
-      searchTerm
+      searchTerm,
+      isShort,
+      recordPreviousSearch
     );
-    setFoundInAllMovies(filteredMovies);
   };
 
+  // поиск среди добавленных
   const handleAddedMoviesSearch = () => {
     filterMovies(
       addedMovies,
-      searchTermInAdded
+      searchTermInAdded,
+      isShortAdded,
+      recordSearchInAdded
     );
   };
+
+  // сохранение предыдущего поиска
+  useEffect(() => {
+    if (!previousSearch.isFirst) {
+      localStorage.setItem("previousSearch", JSON.stringify(previousSearch));
+    }
+  }, [previousSearch]);
+
+  useEffect(() => {
+    if (allMovies.length > 1) {
+      handleAllMoviesSearch();
+    }
+  }, [isShort || allMovies]);
+
+  useEffect(() => {
+    handleAddedMoviesSearch();
+  }, [isShortAdded]);
 
   const handleMenuToggle = () => {
     setIsMenuOpen((prevState) => !prevState);
@@ -254,7 +314,7 @@ function App() {
 
   // Дефолт при смене страницы
   useEffect(() => {
-    setErrMess({ err: false, mess: "" });
+    clearErr();
     setIsEditable(false);
     isMenuOpen && handleMenuToggle();
   }, [location]);
@@ -286,7 +346,7 @@ function App() {
     };
   });
 
-  if (loading) {
+  if (isLoading) {
     return <Preloader />
   }
   return (
@@ -307,14 +367,16 @@ function App() {
               <ProtectedRoute
                 element={Movies}
                 loggedIn={loggedIn}
-                allMovies={foundInAllMovies}
+                movies={allMovies}
                 addMovie={handleAddMovie}
                 deleteMovie={handleDeleteMovie}
                 isLiked={isLiked}
                 isShort={isShort}
                 handleChange={handleChangeInAll}
+                filter={handleFilterInAll}
                 search={handleAllMoviesSearch}
                 searchTerm={searchTerm}
+                searchedMovies={foundInAllMovies}
               />
             }
           />
@@ -324,14 +386,16 @@ function App() {
               <ProtectedRoute
                 element={SavedMovies}
                 loggedIn={loggedIn}
-                addedMovies={addedMovies}
+                movies={addedMovies}
                 addMovie={handleAddMovie}
                 deleteMovie={handleDeleteMovie}
                 isLiked={isLiked}
                 isShort={isShortAdded}
                 handleChange={handleChangeInAdded}
+                filter={handleFilterInAdded}
                 search={handleAddedMoviesSearch}
                 searchTerm={searchTermInAdded}
+                searchedMovies={foundInAddedMovies}
               />
             }
           />

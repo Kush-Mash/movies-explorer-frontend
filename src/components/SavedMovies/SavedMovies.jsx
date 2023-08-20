@@ -2,33 +2,44 @@ import SearchForm from "../SearchForm/SearchForm.jsx";
 import MoviesCardList from "../MoviesCardList/MoviesCardList.jsx";
 
 function SavedMovies({
-  addedMovies,
+  movies,
   addMovie,
   deleteMovie,
   isLiked,
   isShort,
   handleChange,
+  filter,
   search,
   searchTearm,
+  searchedMovies
 }) {
   return (
     <main>
       <SearchForm
-        movies={addedMovies}
+        movies={movies}
         search={search}
         handleChange={handleChange}
+        filter={filter}
         searchTearm={searchTearm}
         isShort={isShort}
       />
       <p className="message">
-        {addedMovies.length === 0 && "Список сохранённых фильмов пуст"}
+        {movies.length === 0 && "Список сохранённых фильмов пуст"}
       </p>
+      {/* <p className="message">
+        {(movies.length === 0 &&
+        "Список сохранённых фильмов пуст") ||
+        (searchedMovies.length === 0 &&
+        movies.length > 0 &&
+        "Ничего не найдено")}
+      </p> */}
       <MoviesCardList
         more={"cards__list_place_saved"}
-        moviesArray={addedMovies}
+        movies={movies}
         addMovie={addMovie}
         deleteMovie={deleteMovie}
         isLiked={isLiked}
+        searchedMovies={searchedMovies}
       />
     </main>
   );
