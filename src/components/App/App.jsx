@@ -93,9 +93,15 @@ function App() {
     localStorage.clear();
     setLoggedIn(false);
     setCurrentUser({});
-    setIsShort(false);
     setAllMovies([]);
     setAddedMovies([]);
+    setSearchTerm("");
+    setSearchTermInAdded("");
+    setIsShort(false);
+    setIsShortAdded(false);
+    setFoundInAllMovies([]);
+    setFoundInAddedMovies([]);
+    setPreviousSearch({});
     navigate("/", { replace: true });
   };
 
