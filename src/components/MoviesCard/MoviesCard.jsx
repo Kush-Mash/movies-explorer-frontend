@@ -6,9 +6,13 @@ function MoviesCard({ movie, addMovie, deleteMovie, isLiked }) {
   const handleLikeClick = () =>
     !isLiked(movie) ? addMovie(movie) : deleteMovie(movie);
 
-  const convertDuration = (`
+  const convertDuration = `
   ${Math.floor(movie.duration / 60)}ч
-  ${movie.duration % 60}м`);
+  ${movie.duration % 60}м`;
+
+  const goToTrailer = () => {
+    window.open(movie.trailerLink, "_blank").focus();
+  };
 
   return (
     <li className="card">
@@ -24,18 +28,26 @@ function MoviesCard({ movie, addMovie, deleteMovie, isLiked }) {
       ) : (
         <button
           className={`each-button card__like ${
-            isLiked(movie) ? "card__like_status_active" : "card__like_status_inactive"
+            isLiked(movie)
+              ? "card__like_status_active"
+              : "card__like_status_inactive"
           }`}
           type="button"
           aria-label="Добавить в избранное"
           onClick={handleLikeClick}
         ></button>
       )}
-      <img
-        className="card__img"
-        alt={movie.nameRU}
-        src={movie.thumbnail}
-      ></img>
+      <button
+        className="each-button card__trailer"
+        type="button"
+        onClick={goToTrailer}
+      >
+        <img
+          className="card__img"
+          alt={movie.nameRU}
+          src={movie.image}
+        />
+      </button>
     </li>
   );
 }
