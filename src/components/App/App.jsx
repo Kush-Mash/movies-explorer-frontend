@@ -101,7 +101,12 @@ function App() {
     setIsShortAdded(false);
     setFoundInAllMovies([]);
     setFoundInAddedMovies([]);
-    setPreviousSearch({});
+    setPreviousSearch({
+      searchTerm: "",
+      isFirst: true,
+      isShort: false,
+      movies: [],
+    })
     navigate("/", { replace: true });
   };
 

@@ -24,17 +24,17 @@ function Movies({
         searchTearm={searchTearm}
         isShort={isShort}
       />
-      {/* <p className="message">
-        {movies.length === 0 && "Нужно ввести ключевое слово"}
-      </p> */}
       <p className="message">
+        {movies.length === 0 && "Нужно ввести ключевое слово"}
+      </p>
+      {/* <p className="message">
         {(searchedMovies.length === 0 &&
           movies.length === 0 &&
           "Нужно ввести ключевое слово") ||
           (searchedMovies.length === 0 &&
           movies.length > 0 &&
           "Ничего не найдено")}
-      </p>
+      </p> */}
       <MoviesCardList
         more={""}
         moviesArray={movies}
