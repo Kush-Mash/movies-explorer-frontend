@@ -1,6 +1,7 @@
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-function MoviesCardList({ more, movies, addMovie, deleteMovie, isLiked, searchedMovies }) {
+function MoviesCardList({ more, addMovie, deleteMovie, isLiked, searchedMovies }) {
+
   return (
     <section className="cards">
 

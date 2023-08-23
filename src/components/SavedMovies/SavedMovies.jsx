@@ -24,15 +24,12 @@ function SavedMovies({
         isShort={isShort}
       />
       <p className="message">
-        {movies.length === 0 && "Список сохранённых фильмов пуст"}
-      </p>
-      {/* <p className="message">
         {(movies.length === 0 &&
         "Список сохранённых фильмов пуст") ||
         (searchedMovies.length === 0 &&
         movies.length > 0 &&
         "Ничего не найдено")}
-      </p> */}
+      </p>
       <MoviesCardList
         more={"cards__list_place_saved"}
         movies={movies}

@@ -157,19 +157,20 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      Promise.all([mainApi.getCurrentUser(), mainApi.getSavedMovies()])
+      Promise.all([
+        mainApi.getCurrentUser(),
+        mainApi.getSavedMovies()])
         .then(([user, movies]) => {
           setCurrentUser(user);
-          console.log(user);
-          console.log(movies);
           setAddedMovies(movies);
-          console.log(addedMovies);
           setFoundInAddedMovies(movies);
         })
         .catch((err) => {
           console.log(err);
         });
-        const prevSearch = JSON.parse(localStorage.getItem("previousSearch"));
+        const prevSearch = JSON.parse(
+          localStorage.getItem("previousSearch")
+        );
         if (prevSearch) {
           setSearchTerm(prevSearch.searchTerm);
           setFoundInAllMovies(prevSearch.movies);
@@ -179,6 +180,7 @@ function App() {
   }, [loggedIn]);
 
   const getMoviesArray = () => {
+    setIsLoading(true);
     getMovies()
       .then((moviesArray) => {
         console.log(moviesArray);
@@ -202,6 +204,9 @@ function App() {
       .catch((err) => {
         console.log(err);
         setAllMovies([]);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -222,6 +227,7 @@ function App() {
       .then((res) => {
         if (res) {
           setAddedMovies([res, ...addedMovies]);
+          setFoundInAddedMovies([res, ...foundInAddedMovies]);
         }
       })
       .catch((err) => console.log(err));
@@ -238,6 +244,9 @@ function App() {
         setAddedMovies((items) =>
           items.filter((i) => i.movieId !== movie.movieId)
         );
+        setFoundInAddedMovies((items) =>
+          items.filter((i) => i.movieId !== movie.movieId)
+        )
       })
       .catch((err) => console.log(err));
   };
@@ -309,11 +318,12 @@ function App() {
     }
   }, [previousSearch]);
 
+  // чекбокс
   useEffect(() => {
     if (allMovies.length > 1) {
       handleAllMoviesSearch();
     }
-  }, [isShort || allMovies]);
+  }, [isShort, allMovies]);
 
   useEffect(() => {
     handleAddedMoviesSearch();
@@ -357,11 +367,9 @@ function App() {
     };
   });
 
-  if (isLoading) {
-    return <Preloader />
-  }
   return (
     <CurrentUserContext.Provider value={currentUser}>
+      {isLoading && <Preloader />}
       <div className="page">
         {locationsWithHeader.includes(location) && (
           <Header
