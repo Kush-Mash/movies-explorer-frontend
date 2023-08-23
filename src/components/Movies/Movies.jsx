@@ -37,9 +37,9 @@ function Movies({
     }
   }, [windowSize]);
 
-  const separateMoviesPart = () => {
-    return setMoviesPart(searchedMovies.slice(0, initialCards));
-  }
+  useEffect(() => {
+    setMoviesPart(searchedMovies.slice(0, initialCards));
+  }, [searchedMovies, initialCards]);
 
   const handleMoreButtonClick = () => {
     setInitialCards(initialCards + moreCards);
@@ -69,7 +69,7 @@ function Movies({
         addMovie={addMovie}
         deleteMovie={deleteMovie}
         isLiked={isLiked}
-        searchedMovies={separateMoviesPart()}
+        searchedMovies={moviesPart}
       />
       {(initialCards < searchedMovies.length)
       && <MoreButton handleClick={handleMoreButtonClick} />}
