@@ -279,9 +279,9 @@ function App() {
   const recordPreviousSearch = (takenMovies) => {
     setFoundInAllMovies(takenMovies);
     setPreviousSearch({
-      searchTerm,
+      searchTerm: searchTerm,
       isFirst: false,
-      isShort,
+      isShort: isShort,
       movies: takenMovies,
     })
   }
@@ -338,6 +338,9 @@ function App() {
     clearErr();
     setIsEditable(false);
     isMenuOpen && handleMenuToggle();
+    setIsShortAdded(false);
+    setSearchTermInAdded("");
+    setFoundInAddedMovies(addedMovies);
   }, [location]);
 
   const clearErr = () => {

@@ -56,10 +56,10 @@ function Movies({
         isShort={isShort}
       />
       <p className="message">
-        {(searchedMovies.length === 0 &&
-          movies.length === 0 &&
+        {(searchedMovies.length < 1 &&
+          movies.length < 1 &&
           "Нужно ввести ключевое слово") ||
-          (searchedMovies.length === 0 &&
+          (searchedMovies.length < 1 &&
           movies.length > 0 &&
           "Ничего не найдено")}
       </p>
@@ -69,6 +69,7 @@ function Movies({
         addMovie={addMovie}
         deleteMovie={deleteMovie}
         isLiked={isLiked}
+        searchTearm={searchTearm}
         searchedMovies={moviesPart}
       />
       {(initialCards < searchedMovies.length)
