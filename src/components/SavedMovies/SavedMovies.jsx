@@ -7,10 +7,12 @@ function SavedMovies({
   deleteMovie,
   isLiked,
   isShort,
+  setIsShort,
   handleChange,
   filter,
   search,
-  searchTearm,
+  searchTerm,
+  setSearchTerm,
   searchedMovies
 }) {
   return (
@@ -20,8 +22,10 @@ function SavedMovies({
         search={search}
         handleChange={handleChange}
         filter={filter}
-        searchTearm={searchTearm}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
         isShort={isShort}
+        setIsShort={setIsShort}
       />
       <p className="message">
         {(movies.length === 0 &&

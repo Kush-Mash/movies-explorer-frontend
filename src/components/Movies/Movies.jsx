@@ -11,10 +11,10 @@ function Movies({
   deleteMovie,
   isLiked,
   isShort,
-  handleChange,
-  filter,
+  setIsShort,
   search,
-  searchTearm,
+  searchTerm,
+  setSearchTerm,
   searchedMovies
 }) {
   const windowSize = useWindowSize();
@@ -50,10 +50,10 @@ function Movies({
       <SearchForm
         movies={movies}
         search={search}
-        handleChange={handleChange}
-        filter={filter}
-        searchTearm={searchTearm}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
         isShort={isShort}
+        setIsShort={setIsShort}
       />
       <p className="message">
         {(searchedMovies.length < 1 &&
@@ -69,7 +69,6 @@ function Movies({
         addMovie={addMovie}
         deleteMovie={deleteMovie}
         isLiked={isLiked}
-        searchTearm={searchTearm}
         searchedMovies={moviesPart}
       />
       {(initialCards < searchedMovies.length)

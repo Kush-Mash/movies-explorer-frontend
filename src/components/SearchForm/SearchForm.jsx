@@ -3,13 +3,13 @@ import FilterCheckbox from "../UIComponents/FilterCheckbox/FilterCheckbox.jsx";
 function SearchForm({
   movies,
   search,
-  handleChange,
-  filter,
-  searchTearm,
+  searchTerm,
+  setSearchTerm,
   isShort,
+  setIsShort
 }) {
-  const handleChangeSearchTerm = (evt) => {
-    handleChange(evt);
+  const handleChange = (evt) => {
+    setSearchTerm(evt.target.value);
   };
 
   const handleSearch = (evt) => {
@@ -17,10 +17,11 @@ function SearchForm({
     search(movies);
   };
 
-  const handleFilter = (evt) => {
-    filter(evt);
+  const handleFilter = () => {
+    setIsShort(!isShort);
     search(movies);
   };
+
   return (
     <section className="search">
       <div className="search__box">
@@ -30,13 +31,13 @@ function SearchForm({
               className="search__input"
               type="text"
               placeholder="Фильм"
-              value={searchTearm}
-              onChange={handleChangeSearchTerm}
+              value={searchTerm}
+              onChange={handleChange}
             />
             <button
               className="each-button search__submit"
               type="submit"
-              // disabled={searchTearm.length === 0}
+              // disabled={searchTerm.length === 0}
             />
           </div>
           <label className="search__filter" htmlFor="checkbox">

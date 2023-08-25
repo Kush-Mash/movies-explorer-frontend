@@ -255,14 +255,6 @@ function App() {
     addedMovies.some((addedMovie) =>
       addedMovie.movieId === movie.movieId);
 
-  // инпуты
-  const handleChangeInAll = (evt) => setSearchTerm(evt.target.value);
-  const handleChangeInAdded = (evt) => setSearchTermInAdded(evt.target.value);
-
-  // чекбоксы
-  const handleFilterInAll = () => setIsShort(!isShort);
-  const handleFilterInAdded = () => setIsShortAdded(!isShortAdded);
-
   const filterMovies = (movies, searchTerm, isShort, record) => {
     const takenMovies = movies.filter((movie) =>
     (isShort
@@ -394,10 +386,10 @@ function App() {
                 deleteMovie={handleDeleteMovie}
                 isLiked={isLiked}
                 isShort={isShort}
-                handleChange={handleChangeInAll}
-                filter={handleFilterInAll}
+                setIsShort={setIsShort}
                 search={handleAllMoviesSearch}
                 searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
                 searchedMovies={foundInAllMovies}
               />
             }
@@ -413,10 +405,10 @@ function App() {
                 deleteMovie={handleDeleteMovie}
                 isLiked={isLiked}
                 isShort={isShortAdded}
-                handleChange={handleChangeInAdded}
-                filter={handleFilterInAdded}
+                setIsShort={setIsShortAdded}
                 search={handleAddedMoviesSearch}
                 searchTerm={searchTermInAdded}
+                setSearchTerm={setSearchTermInAdded}
                 searchedMovies={foundInAddedMovies}
               />
             }
