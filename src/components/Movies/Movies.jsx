@@ -56,8 +56,8 @@ function Movies({
         setIsShort={setIsShort}
       />
       <p className="message">
-        {(searchedMovies.length < 1 &&
-          movies.length < 1 &&
+        {(((searchedMovies.length < 1 &&
+          movies.length < 1) || searchTerm.length < 1) &&
           "Нужно ввести ключевое слово") ||
           (searchedMovies.length < 1 &&
           movies.length > 0 &&

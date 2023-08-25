@@ -256,15 +256,17 @@ function App() {
       addedMovie.movieId === movie.movieId);
 
   const filterMovies = (movies, searchTerm, isShort, record) => {
-    const takenMovies = movies.filter((movie) =>
-    (isShort
-      ? movie.duration <= 40 &&
-        (movie.nameEN.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        movie.nameRU.toLowerCase().includes(searchTerm.toLowerCase()))
-      : movie.nameEN.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        movie.nameRU.toLowerCase().includes(searchTerm.toLowerCase()))
-    );
-    record(takenMovies);
+    if (searchTerm.length > 0) {
+      const takenMovies = movies.filter((movie) =>
+      (isShort
+        ? movie.duration <= 40 &&
+          (movie.nameEN.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          movie.nameRU.toLowerCase().includes(searchTerm.toLowerCase()))
+        : movie.nameEN.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          movie.nameRU.toLowerCase().includes(searchTerm.toLowerCase()))
+      );
+      record(takenMovies);
+    }
   };
 
   // запомнить поисковый запрос и фильмы
