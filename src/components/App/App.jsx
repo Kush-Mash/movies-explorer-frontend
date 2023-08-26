@@ -211,7 +211,7 @@ function App() {
   };
 
   const keepMoviesArray = () => {
-    if (allMovies === 0) {
+    if (allMovies < 1) {
       const keepingMovies = JSON.parse(localStorage.getItem("movies"));
       if (!keepingMovies) {
         getMoviesArray();
@@ -255,17 +255,20 @@ function App() {
     addedMovies.some((addedMovie) =>
       addedMovie.movieId === movie.movieId);
 
-  const filterMovies = (movies, searchTerm, isShort, record) => {
-    const takenMovies = movies.filter((movie) =>
-    (isShort
-      ? movie.duration <= 40 &&
-        (movie.nameEN.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        movie.nameRU.toLowerCase().includes(searchTerm.toLowerCase()))
-      : movie.nameEN.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        movie.nameRU.toLowerCase().includes(searchTerm.toLowerCase()))
-    );
-    record(takenMovies);
-  };
+      const filterMovies = (movies, searchTerm, isShort, record) => {
+        const selectString = (name) => {
+          return name.toLowerCase().includes(searchTerm.toLowerCase())
+        }
+        const takenMovies = movies.filter((movie) =>
+        (isShort
+          ? movie.duration <= 40 &&
+            (selectString(movie.nameEN) ||
+            selectString(movie.nameRU))
+          : selectString(movie.nameEN) ||
+            selectString(movie.nameRU))
+        );
+        record(takenMovies);
+      };
 
   // запомнить поисковый запрос и фильмы
   const recordPreviousSearch = (takenMovies) => {
