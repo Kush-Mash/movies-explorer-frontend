@@ -211,7 +211,7 @@ function App() {
   };
 
   const keepMoviesArray = () => {
-    if (allMovies < 1) {
+    if (allMovies === 0) {
       const keepingMovies = JSON.parse(localStorage.getItem("movies"));
       if (!keepingMovies) {
         getMoviesArray();
@@ -256,17 +256,15 @@ function App() {
       addedMovie.movieId === movie.movieId);
 
   const filterMovies = (movies, searchTerm, isShort, record) => {
-    if (searchTerm.length > 0) {
-      const takenMovies = movies.filter((movie) =>
-      (isShort
-        ? movie.duration <= 40 &&
-          (movie.nameEN.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          movie.nameRU.toLowerCase().includes(searchTerm.toLowerCase()))
-        : movie.nameEN.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          movie.nameRU.toLowerCase().includes(searchTerm.toLowerCase()))
-      );
-      record(takenMovies);
-    }
+    const takenMovies = movies.filter((movie) =>
+    (isShort
+      ? movie.duration <= 40 &&
+        (movie.nameEN.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        movie.nameRU.toLowerCase().includes(searchTerm.toLowerCase()))
+      : movie.nameEN.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        movie.nameRU.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+    record(takenMovies);
   };
 
   // запомнить поисковый запрос и фильмы
@@ -286,13 +284,15 @@ function App() {
 
   // поиск среди всех
   const handleAllMoviesSearch = () => {
-    keepMoviesArray();
-    filterMovies(
-      allMovies,
-      searchTerm,
-      isShort,
-      recordPreviousSearch
-    );
+    if (searchTerm.length > 0) {
+      keepMoviesArray();
+      filterMovies(
+        allMovies,
+        searchTerm,
+        isShort,
+        recordPreviousSearch
+      );
+    }
   };
 
   // поиск среди добавленных

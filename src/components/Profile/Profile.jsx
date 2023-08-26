@@ -1,6 +1,5 @@
 import { useContext, useState, useEffect } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
-import { useForm } from "../../hooks/useForm.js";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 
 function Profile({ logOut, handleUpdate, errMess, isEditable, setIsEditable, clearErr }) {
