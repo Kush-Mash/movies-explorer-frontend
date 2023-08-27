@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
-import { useForm } from "../../hooks/useForm.js";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 
 function Login({ handleLogin, errMess, clearErr }) {
-  // const { values, setValues, handleChange } = useForm({ email: "", password: "" });
 
-  const { values, handleChange, errors, isValid, resetForm } =
+  const { values, handleChange, errors } =
     useFormWithValidation({ email: "", password: "" });
 
   const handleSubmit = (evt) => {

@@ -37,7 +37,6 @@ function SearchForm({
             <button
               className="each-button search__submit"
               type="submit"
-              // disabled={searchTerm.length === 0}
             />
           </div>
           <label className="search__filter" htmlFor="checkbox">

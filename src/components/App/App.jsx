@@ -255,20 +255,20 @@ function App() {
     addedMovies.some((addedMovie) =>
       addedMovie.movieId === movie.movieId);
 
-      const filterMovies = (movies, searchTerm, isShort, record) => {
-        const selectString = (name) => {
-          return name.toLowerCase().includes(searchTerm.toLowerCase())
-        }
-        const takenMovies = movies.filter((movie) =>
-        (isShort
-          ? movie.duration <= 40 &&
-            (selectString(movie.nameEN) ||
-            selectString(movie.nameRU))
-          : selectString(movie.nameEN) ||
-            selectString(movie.nameRU))
-        );
-        record(takenMovies);
-      };
+  const filterMovies = (movies, searchTerm, isShort, record) => {
+    const selectString = (name) => {
+      return name.toLowerCase().includes(searchTerm.toLowerCase())
+    }
+    const takenMovies = movies.filter((movie) =>
+    (isShort
+      ? movie.duration <= 40 &&
+        (selectString(movie.nameEN) ||
+        selectString(movie.nameRU))
+      : selectString(movie.nameEN) ||
+        selectString(movie.nameRU))
+    );
+    record(takenMovies);
+  };
 
   // запомнить поисковый запрос и фильмы
   const recordPreviousSearch = (takenMovies) => {
