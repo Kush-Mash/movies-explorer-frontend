@@ -162,7 +162,7 @@
   .search__input {
     width: 55%;
     background-image: none;
-    padding-left: 0;
+    padding-left: 10px;
   }
 
   .search__condition {

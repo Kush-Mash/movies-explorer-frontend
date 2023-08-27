@@ -1,36 +1,53 @@
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
-import pic from "../../images/pic__COLOR_pic.png";
 
-function MoviesCard() {
+function MoviesCard({ movie, addMovie, deleteMovie, isLiked }) {
   const location = useLocation();
-  const [isLiked, setIsLiked] = useState(false);
 
-  function handleLikeClick() {
-    setIsLiked(!isLiked);
-  }
+  const handleLikeClick = () =>
+    !isLiked(movie) ? addMovie(movie) : deleteMovie(movie);
+
+  const convertDuration = `
+  ${Math.floor(movie.duration / 60)}ч
+  ${movie.duration % 60}м`;
+
+  const goToTrailer = () => {
+    window.open(movie.trailerLink, "_blank").focus();
+  };
 
   return (
     <li className="card">
-      <h2 className="card__title">33 слова о дизайне</h2>
-      <p className="card__subtitle">1ч 42м</p>
+      <h2 className="card__title">{movie.nameRU}</h2>
+      <p className="card__subtitle">{convertDuration}</p>
       {location.pathname === "/saved-movies" ? (
         <button
           className="each-button card__like card__like_status_delete"
           type="button"
           aria-label="Удалить из избранного"
+          onClick={handleLikeClick}
         ></button>
       ) : (
         <button
           className={`each-button card__like ${
-            isLiked ? "card__like_status_active" : "card__like_status_inactive"
+            isLiked(movie)
+              ? "card__like_status_active"
+              : "card__like_status_inactive"
           }`}
           type="button"
           aria-label="Добавить в избранное"
           onClick={handleLikeClick}
         ></button>
       )}
-      <img className="card__img" alt="Превью фильма" src={pic}></img>
+      <button
+        className="each-button card__trailer"
+        type="button"
+        onClick={goToTrailer}
+      >
+        <img
+          className="card__img"
+          alt={movie.nameRU}
+          src={movie.image}
+        />
+      </button>
     </li>
   );
 }

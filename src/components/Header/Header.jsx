@@ -3,11 +3,9 @@ import { useState } from 'react';
 import logo from '../../images/logo.svg'
 import Navigation from '../Navigation/Navigation.jsx';
 
-function Header({ loggedIn }) {
+function Header({ loggedIn, isMenuOpen, handleMenuToggle }) {
   const location = useLocation();
   const headerModifier = location.pathname === '/' ? 'header_place_main' : 'header_place_movies';
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const handleMenuToggle = () => { setIsMenuOpen(prevState => !prevState) };
 
   return (
     <header className={`header ${headerModifier}`}>

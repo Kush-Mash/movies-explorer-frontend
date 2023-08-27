@@ -1,16 +1,22 @@
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-function MoviesCardList({more}) {
+function MoviesCardList({ more, addMovie, deleteMovie, isLiked, searchedMovies }) {
+
   return (
     <section className="cards">
+
       <ul className={`cards__list ${more}`}>
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
+        {
+          searchedMovies.map((movie) => (
+            <MoviesCard
+              movie={movie}
+              key={movie.movieId}
+              addMovie={addMovie}
+              deleteMovie={deleteMovie}
+              isLiked={isLiked}
+            />
+          ))
+        }
       </ul>
     </section>
   );

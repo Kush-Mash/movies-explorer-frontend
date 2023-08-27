@@ -1,20 +1,46 @@
 import FilterCheckbox from "../UIComponents/FilterCheckbox/FilterCheckbox.jsx";
 
-function SearchForm() {
+function SearchForm({
+  movies,
+  search,
+  searchTerm,
+  setSearchTerm,
+  isShort,
+  setIsShort
+}) {
+  const handleChange = (evt) => {
+    setSearchTerm(evt.target.value);
+  };
+
+  const handleSearch = (evt) => {
+    evt.preventDefault();
+    search(movies);
+  };
+
+  const handleFilter = () => {
+    setIsShort(!isShort);
+    search(movies);
+  };
+
   return (
     <section className="search">
       <div className="search__box">
-        <form className="search__form">
+        <form className="search__form" name="search" onSubmit={handleSearch}>
           <div className="search__unit">
             <input
               className="search__input"
               type="text"
               placeholder="Фильм"
+              value={searchTerm}
+              onChange={handleChange}
             />
-            <button className="each-button search__submit" type="submit"></button>
+            <button
+              className="each-button search__submit"
+              type="submit"
+            />
           </div>
           <label className="search__filter" htmlFor="checkbox">
-            <FilterCheckbox />
+            <FilterCheckbox handleFilter={handleFilter} isShort={isShort} />
             <span className="search__condition">Короткометражки</span>
           </label>
         </form>

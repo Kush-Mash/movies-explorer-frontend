@@ -9,7 +9,7 @@
 }
 
 .profile__title {
-  margin: 4px 0 90px;
+  margin: 4px 0 105px;
   padding: 0;
   font-size: 24px;
   font-weight: 500;
@@ -22,7 +22,7 @@
 }
 
 .profile__label {
-  margin: 17px 0 0;
+  margin: 2px 0 0;
   padding-top: 16px;
   width: 410px;
   border-top: 1px solid #E8E8E8;
@@ -39,7 +39,7 @@
 
 .profile__input {
   margin: 0 0 0 auto;
-  padding: 0;
+  padding: 0 4px;
   min-height: 14px;
   width: 260px;
   border: none;
@@ -55,8 +55,20 @@
   outline: 1px solid #E8E8E8;
 }
 
+.profile__warning {
+  margin: 2px 0 0;
+  width: 410px;
+  min-height: 12px;
+  display: flex;
+  justify-content: center;
+  color: #FF4062;
+  font-size: 9px;
+  text-align: center;
+}
+
 .profile__error {
-  margin: 189px 0 0;
+  margin: 160px 0 0;
+  min-height: 12px;
   color: #FF4062;
   font-size: 11px;
   text-align: center;
@@ -64,7 +76,7 @@
 
 .profile__button {
   padding: 0;
-  margin: 215px calc((100% - 120px)/2) 0;
+  margin: 202px calc((100% - 120px)/2) 0;
   width: 120px;
   height: 27px;
   border: none;
@@ -127,7 +139,7 @@
   }
 
   .profile__title {
-    margin-bottom: 47px;
+    margin-bottom: 62px;
   }
 
   .profile__label {
@@ -138,9 +150,17 @@
     width: 200px;
   }
 
+  .profile__warning {
+    width: 260px;
+  }
+
   .profile__button {
-    margin-top: 373px;
+    margin-top: 360px;
     font-size: 12px;
+  }
+
+  .profile__error {
+    margin-top: 320px;
   }
 
   .profile__logout {

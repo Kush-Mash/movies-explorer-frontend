@@ -1,32 +1,66 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext.js";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 
-function Profile({ logout }) {
-  const [initChange, setInitChange] = useState(false);
+function Profile({ logOut, handleUpdate, errMess, isEditable, setIsEditable, clearErr }) {
+  const currentUser = useContext(CurrentUserContext);
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation({ email: "", password: "" });
 
-  function handleClickEditButton(event) {
-    event.preventDefault();
-    setInitChange(true);
-  }
+  useEffect(() => {
+    if (currentUser) {
+      resetForm(currentUser, {}, true);
+    }
+  }, [currentUser, resetForm]);
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    setInitChange(false);
-  }
+  const handleClickEditButton = (evt) => {
+    evt.preventDefault();
+    setIsEditable(true);
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    setIsEditable(false);
+    handleUpdate(values);
+  };
 
   return (
     <section className="profile">
-      <h1 className="profile__title">Привет, Виталий!</h1>
-      <form className="profile__form">
+      <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
+      <form className="form profile__form" onSubmit={handleSubmit}>
         <label className="profile__label">
           Имя
-          <input className="profile__input" type="text" placeholder="Ваше имя" />
+          <input
+            className="profile__input"
+            name="name"
+            type="text"
+            minLength="2"
+            maxLength="30"
+            placeholder="Ваше имя"
+            onChange={handleChange}
+            onFocus={clearErr}
+            value={values.name || ""}
+            disabled={!isEditable}
+            pattern="[а-яёА-ЯЁa-zA-Z \-]{1,}"
+          />
         </label>
+        <p className="profile__warning">{errors.name || ""}</p>
         <label className="profile__label">
           E-mail
-          <input className="profile__input" type="email" placeholder="Почта" />
+          <input
+            className="profile__input"
+            name="email"
+            type="email"
+            placeholder="Почта"
+            onChange={handleChange}
+            onFocus={clearErr}
+            value={values.email || ""}
+            disabled={!isEditable}
+            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+          />
         </label>
-        {!initChange ? (
+        <p className="profile__warning">{errors.email || ""}</p>
+        {!isEditable ? (
           <>
             <button
               className="each-button profile__button"
@@ -35,21 +69,25 @@ function Profile({ logout }) {
             >
               Редактировать
             </button>
-            <Link to="/signin">
-              <button
-                className="each-button profile__logout"
-                type="button"
-                onClick={logout}
-              >
-                Выйти из&nbsp;аккаунта
-              </button>
-            </Link>
+            <button
+              className="each-button profile__logout"
+              type="button"
+              onClick={logOut}
+            >
+              Выйти из&nbsp;аккаунта
+            </button>
           </>
         ) : (
           <>
-            <p className="profile__error">При обновлении профиля произошла ошибка.</p>
+            <p className="profile__error">{errMess.mess}</p>
             <button
-              className="each-button profile__submit profile__submit_inactive"
+              className={`each-button profile__submit ${
+                !isValid ||
+                (values.name === currentUser.name &&
+                  values.email === currentUser.email)
+                  ? "profile__submit_inactive"
+                  : "profile__submit_active"
+              }`}
               type="submit"
               onClick={handleSubmit}
             >

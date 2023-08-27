@@ -61,13 +61,19 @@
   background-image: url(../../images/del.svg);
 }
 
+.card__trailer {
+  padding: 0;
+  border: none;
+  background: transparent;
+  grid-area: photo;
+}
+
 .card__img {
   margin: 6px;
   display: block;
   width: 220px;
   height: 122px;
   object-fit: cover;
-  grid-area: photo;
 }
 
 @media screen and (max-width: 480px) {
